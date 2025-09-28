@@ -40,7 +40,31 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/Inc/fdcan.h ../Core/Inc/main.h ../Core/Inc/gpio.h
+ ../Core/Inc/fdcan.h ../Core/Inc/main.h ../Core/Inc/tim.h \
+ ../Core/Inc/gpio.h ../Core/CANopenNode_STM32/CO_app_STM32.h \
+ ../Core/CANopenNode/CANopen.h ../Core/CANopenNode/301/CO_driver.h \
+ ../Core/CANopenNode/301/CO_config.h \
+ ../Core/CANopenNode_STM32/CO_driver_target.h \
+ ../Core/CANopenNode/301/CO_ODinterface.h \
+ ../Core/CANopenNode/301/CO_driver.h \
+ ../Core/CANopenNode/301/CO_NMT_Heartbeat.h \
+ ../Core/CANopenNode/301/CO_ODinterface.h \
+ ../Core/CANopenNode/301/CO_Emergency.h \
+ ../Core/CANopenNode/301/CO_HBconsumer.h \
+ ../Core/CANopenNode/301/CO_NMT_Heartbeat.h \
+ ../Core/CANopenNode/301/CO_Emergency.h \
+ ../Core/CANopenNode/301/CO_SDOserver.h \
+ ../Core/CANopenNode/301/CO_SDOclient.h \
+ ../Core/CANopenNode/301/CO_SDOserver.h ../Core/CANopenNode/301/CO_fifo.h \
+ ../Core/CANopenNode/301/CO_SYNC.h ../Core/CANopenNode/301/CO_PDO.h \
+ ../Core/CANopenNode/301/CO_SYNC.h ../Core/CANopenNode/301/CO_TIME.h \
+ ../Core/CANopenNode/303/CO_LEDs.h ../Core/CANopenNode/304/CO_GFC.h \
+ ../Core/CANopenNode/304/CO_SRDO.h ../Core/CANopenNode/305/CO_LSSslave.h \
+ ../Core/CANopenNode/305/CO_LSS.h ../Core/CANopenNode/305/CO_LSSmaster.h \
+ ../Core/CANopenNode/309/CO_gateway_ascii.h \
+ ../Core/CANopenNode/301/CO_SDOclient.h \
+ ../Core/CANopenNode/305/CO_LSSmaster.h ../Core/CANopenNode/303/CO_LEDs.h \
+ ../Core/CANopenNode/extra/CO_trace.h
 
 ../Core/Inc/main.h:
 
@@ -130,4 +154,70 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Inc/main.h:
 
+../Core/Inc/tim.h:
+
 ../Core/Inc/gpio.h:
+
+../Core/CANopenNode_STM32/CO_app_STM32.h:
+
+../Core/CANopenNode/CANopen.h:
+
+../Core/CANopenNode/301/CO_driver.h:
+
+../Core/CANopenNode/301/CO_config.h:
+
+../Core/CANopenNode_STM32/CO_driver_target.h:
+
+../Core/CANopenNode/301/CO_ODinterface.h:
+
+../Core/CANopenNode/301/CO_driver.h:
+
+../Core/CANopenNode/301/CO_NMT_Heartbeat.h:
+
+../Core/CANopenNode/301/CO_ODinterface.h:
+
+../Core/CANopenNode/301/CO_Emergency.h:
+
+../Core/CANopenNode/301/CO_HBconsumer.h:
+
+../Core/CANopenNode/301/CO_NMT_Heartbeat.h:
+
+../Core/CANopenNode/301/CO_Emergency.h:
+
+../Core/CANopenNode/301/CO_SDOserver.h:
+
+../Core/CANopenNode/301/CO_SDOclient.h:
+
+../Core/CANopenNode/301/CO_SDOserver.h:
+
+../Core/CANopenNode/301/CO_fifo.h:
+
+../Core/CANopenNode/301/CO_SYNC.h:
+
+../Core/CANopenNode/301/CO_PDO.h:
+
+../Core/CANopenNode/301/CO_SYNC.h:
+
+../Core/CANopenNode/301/CO_TIME.h:
+
+../Core/CANopenNode/303/CO_LEDs.h:
+
+../Core/CANopenNode/304/CO_GFC.h:
+
+../Core/CANopenNode/304/CO_SRDO.h:
+
+../Core/CANopenNode/305/CO_LSSslave.h:
+
+../Core/CANopenNode/305/CO_LSS.h:
+
+../Core/CANopenNode/305/CO_LSSmaster.h:
+
+../Core/CANopenNode/309/CO_gateway_ascii.h:
+
+../Core/CANopenNode/301/CO_SDOclient.h:
+
+../Core/CANopenNode/305/CO_LSSmaster.h:
+
+../Core/CANopenNode/303/CO_LEDs.h:
+
+../Core/CANopenNode/extra/CO_trace.h:

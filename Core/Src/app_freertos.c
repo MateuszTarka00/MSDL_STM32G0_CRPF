@@ -26,7 +26,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "CO_app_STM32.h"
 
+#include "tim.h"
+#include "fdcan.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -144,9 +147,21 @@ void StartDefaultTask(void *argument)
 void CanOpenMenager(void *argument)
 {
   /* USER CODE BEGIN CanOpenMenager */
+  CANopenNodeSTM32 canOpenNodeSTM32;
+  canOpenNodeSTM32.CANHandle = &hfdcan2;
+  canOpenNodeSTM32.HWInitFunction = MX_FDCAN2_Init;
+  canOpenNodeSTM32.timerHandle = &htim17;
+  canOpenNodeSTM32.desiredNodeID = 21;
+  canOpenNodeSTM32.baudrate = 125;
+  canopen_app_init(&canOpenNodeSTM32);
   /* Infinite loop */
   for(;;)
   {
+	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , !canOpenNodeSTM32.outStatusLEDGreen);
+	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, !canOpenNodeSTM32.outStatusLEDRed);
+
+	canopen_app_process();
+	osDelay(pdMS_TO_TICKS(1));
     osDelay(1);
   }
   /* USER CODE END CanOpenMenager */

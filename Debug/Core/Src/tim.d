@@ -1,7 +1,4 @@
-Core/CANopenNode/example/CO_driver_blank.o: \
- ../Core/CANopenNode/example/CO_driver_blank.c \
- ../Core/CANopenNode/301/CO_driver.h ../Core/CANopenNode/301/CO_config.h \
- ../Core/CANopenNode_STM32/CO_driver_target.h ../Core/Inc/main.h \
+Core/Src/tim.o: ../Core/Src/tim.c ../Core/Inc/tim.h ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Core/Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
@@ -33,11 +30,7 @@ Core/CANopenNode/example/CO_driver_blank.o: \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h
 
-../Core/CANopenNode/301/CO_driver.h:
-
-../Core/CANopenNode/301/CO_config.h:
-
-../Core/CANopenNode_STM32/CO_driver_target.h:
+../Core/Inc/tim.h:
 
 ../Core/Inc/main.h:
 
