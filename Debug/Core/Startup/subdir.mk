@@ -16,5 +16,5 @@ OBJS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Core/Startup/startup_stm32g0b1vetx.o: ../Core/Startup/startup_stm32g0b1vetx.s Core/Startup/subdir.mk
-	arm-none-eabi-gcc -mcpu=cortex-m0plus -g3 -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32g0b1vetx.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m0plus -g3 -c -I"C:/Users/mateo/STM32CubeIDE/workspace_1.6.1/MSDL_STM32G0_CRPF/Core/CANopenNode" -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32g0b1vetx.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@" "$<"
 
