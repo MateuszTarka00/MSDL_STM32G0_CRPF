@@ -150,7 +150,7 @@ void CanOpenMenager(void *argument)
   CANopenNodeSTM32 canOpenNodeSTM32;
   canOpenNodeSTM32.CANHandle = &hfdcan2;
   canOpenNodeSTM32.HWInitFunction = MX_FDCAN2_Init;
-  canOpenNodeSTM32.timerHandle = &htim17;
+  canOpenNodeSTM32.timerHandle = &htim14;
   canOpenNodeSTM32.desiredNodeID = 21;
   canOpenNodeSTM32.baudrate = 125;
   canopen_app_init(&canOpenNodeSTM32);
