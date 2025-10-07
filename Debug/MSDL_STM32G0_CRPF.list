@@ -21170,7 +21170,7 @@ void CanOpenMenager(void *argument)
  8007c76:	b2db      	uxtb	r3, r3
  8007c78:	001a      	movs	r2, r3
  8007c7a:	4b0f      	ldr	r3, [pc, #60]	; (8007cb8 <CanOpenMenager+0x7c>)
- 8007c7c:	2104      	movs	r1, #4
+ 8007c7c:	2108      	movs	r1, #8
  8007c7e:	0018      	movs	r0, r3
  8007c80:	f001 fe90 	bl	80099a4 <HAL_GPIO_WritePin>
 	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, !canOpenNodeSTM32.outStatusLEDRed);
@@ -21181,7 +21181,7 @@ void CanOpenMenager(void *argument)
  8007c8c:	b2db      	uxtb	r3, r3
  8007c8e:	001a      	movs	r2, r3
  8007c90:	4b09      	ldr	r3, [pc, #36]	; (8007cb8 <CanOpenMenager+0x7c>)
- 8007c92:	2108      	movs	r1, #8
+ 8007c92:	2104      	movs	r1, #4
  8007c94:	0018      	movs	r0, r3
  8007c96:	f001 fe85 	bl	80099a4 <HAL_GPIO_WritePin>
 
@@ -21812,14 +21812,14 @@ void MX_GPIO_Init(void)
  8008060:	f001 fca0 	bl	80099a4 <HAL_GPIO_WritePin>
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, OUT14_Pin|OUT15_Pin|OUT16_Pin|CAN_OK_Pin
+  HAL_GPIO_WritePin(GPIOE, OUT14_Pin|OUT15_Pin|OUT16_Pin|CAN_FAULT_Pin
  8008064:	23e3      	movs	r3, #227	; 0xe3
  8008066:	009b      	lsls	r3, r3, #2
  8008068:	4868      	ldr	r0, [pc, #416]	; (800820c <MX_GPIO_Init+0x280>)
  800806a:	2200      	movs	r2, #0
  800806c:	0019      	movs	r1, r3
  800806e:	f001 fc99 	bl	80099a4 <HAL_GPIO_WritePin>
-                          |CAN_FAULT_Pin, GPIO_PIN_RESET);
+                          |CAN_OK_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PBPin PBPin PBPin PBPin
                            PBPin PBPin PBPin */
@@ -21988,13 +21988,13 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : PEPin PEPin PEPin PEPin
                            PEPin */
-  GPIO_InitStruct.Pin = OUT14_Pin|OUT15_Pin|OUT16_Pin|CAN_OK_Pin
+  GPIO_InitStruct.Pin = OUT14_Pin|OUT15_Pin|OUT16_Pin|CAN_FAULT_Pin
  800815e:	0021      	movs	r1, r4
  8008160:	187b      	adds	r3, r7, r1
  8008162:	22e3      	movs	r2, #227	; 0xe3
  8008164:	0092      	lsls	r2, r2, #2
  8008166:	601a      	str	r2, [r3, #0]
-                          |CAN_FAULT_Pin;
+                          |CAN_OK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
  8008168:	000c      	movs	r4, r1
  800816a:	193b      	adds	r3, r7, r4
@@ -22127,10 +22127,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
  8008228:	f7ff feb0 	bl	8007f8c <MX_GPIO_Init>
-  MX_FDCAN1_Init();
- 800822c:	f7ff fd46 	bl	8007cbc <MX_FDCAN1_Init>
   MX_FDCAN2_Init();
- 8008230:	f7ff fd8c 	bl	8007d4c <MX_FDCAN2_Init>
+ 800822c:	f7ff fd8e 	bl	8007d4c <MX_FDCAN2_Init>
+  MX_FDCAN1_Init();
+ 8008230:	f7ff fd44 	bl	8007cbc <MX_FDCAN1_Init>
   MX_TIM14_Init();
  8008234:	f000 fa12 	bl	800865c <MX_TIM14_Init>
   /* USER CODE BEGIN 2 */
