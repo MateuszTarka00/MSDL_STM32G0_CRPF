@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "fdcan.h"
+#include "conf_inputs.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -82,7 +83,16 @@ void MX_FDCAN2_Init(void)
   hfdcan2.Init.AutoRetransmission = ENABLE;
   hfdcan2.Init.TransmitPause = ENABLE;
   hfdcan2.Init.ProtocolException = ENABLE;
-  hfdcan2.Init.NominalPrescaler = 32;
+
+  if(getCanOpenBaudRate() == CANOPEN_BAUDRATE_125)
+  {
+	  hfdcan2.Init.NominalPrescaler = 32;
+  }
+  else
+  {
+	  hfdcan2.Init.NominalPrescaler = 16;
+  }
+
   hfdcan2.Init.NominalSyncJumpWidth = 1;
   hfdcan2.Init.NominalTimeSeg1 = 13;
   hfdcan2.Init.NominalTimeSeg2 = 2;

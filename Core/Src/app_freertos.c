@@ -154,7 +154,16 @@ void CanOpenMenager(void *argument)
   canOpenNodeSTM32.HWInitFunction = MX_FDCAN2_Init;
   canOpenNodeSTM32.timerHandle = &htim14;
   canOpenNodeSTM32.desiredNodeID = getCanOpenID();
-  canOpenNodeSTM32.baudrate = 125;
+
+  if(getCanOpenBaudRate() == CANOPEN_BAUDRATE_125)
+  {
+	  canOpenNodeSTM32.baudrate = 125;
+  }
+  else
+  {
+	  canOpenNodeSTM32.baudrate = 250;
+  }
+
   canopen_app_init(&canOpenNodeSTM32);
   /* Infinite loop */
   for(;;)

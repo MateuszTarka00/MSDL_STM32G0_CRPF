@@ -7,6 +7,8 @@
 
 #include "conf_inputs.h"
 
+
+
 typedef union
 {
 	struct {
@@ -54,3 +56,11 @@ uint8_t getCanOpenID(void)
 {
 	return canOpenNodeID.nodeID;
 }
+
+uint8_t getCanOpenBaudRate(void)
+{
+	return !HAL_GPIO_ReadPin(CAN_BUAD_RATE_GPIO_Port, CAN_BUAD_RATE_Pin);
+}
+
+
+

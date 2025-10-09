@@ -10,7 +10,11 @@
 
 #include "main.h"
 
+#define CANOPEN_BAUDRATE_125 0
+#define CANOPEN_BAUDRATE_250 1
+
 void setCanOpenID(void);
 uint8_t getCanOpenID(void);
+uint8_t getCanOpenBaudRate(void);
 
 #endif /* INC_CONF_INPUTS_H_ */
