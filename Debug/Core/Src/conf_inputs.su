@@ -1,3 +1,5 @@
-conf_inputs.c:39:6:setCanOpenID	8	static
-conf_inputs.c:55:9:getCanOpenID	8	static
-conf_inputs.c:60:9:getCanOpenBaudRate	8	static
+conf_inputs.c:40:6:setCanOpenID	8	static
+conf_inputs.c:56:9:getCanOpenID	8	static
+conf_inputs.c:61:9:getCanOpenBaudRate	8	static
+conf_inputs.c:66:6:readBuzzerInput	8	static
+conf_inputs.c:71:9:getBuzzerOnOff	8	static

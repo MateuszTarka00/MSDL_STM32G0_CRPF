@@ -34,6 +34,7 @@ typedef union
  */
 
 static CanOpenNodeID canOpenNodeID;
+static uint8_t buzzerOnOff;
 
 
 void setCanOpenID(void)
@@ -61,6 +62,18 @@ uint8_t getCanOpenBaudRate(void)
 {
 	return !HAL_GPIO_ReadPin(CAN_BUAD_RATE_GPIO_Port, CAN_BUAD_RATE_Pin);
 }
+
+void readBuzzerInput(void)
+{
+	buzzerOnOff = !HAL_GPIO_ReadPin(BUZZER_IN_GPIO_Port, BUZZER_IN_Pin);
+}
+
+uint8_t getBuzzerOnOff(void)
+{
+	return buzzerOnOff;
+}
+
+
 
 
 

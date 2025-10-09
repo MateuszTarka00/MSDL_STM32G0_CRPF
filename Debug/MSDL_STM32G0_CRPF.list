@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000028  00000000  00000000  000202ac  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0003b3df  00000000  00000000  000202d4  2**0
+ 12 .debug_info   0003b419  00000000  00000000  000202d4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00006b2e  00000000  00000000  0005b6b3  2**0
+ 13 .debug_abbrev 00006b2e  00000000  00000000  0005b6ed  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001cd8  00000000  00000000  000621e8  2**3
+ 14 .debug_aranges 00001ce8  00000000  00000000  00062220  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00001b60  00000000  00000000  00063ec0  2**3
+ 15 .debug_ranges 00001b70  00000000  00000000  00063f08  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00023720  00000000  00000000  00065a20  2**0
+ 16 .debug_macro  00023720  00000000  00000000  00065a78  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00026137  00000000  00000000  00089140  2**0
+ 17 .debug_line   0002616d  00000000  00000000  00089198  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000cc575  00000000  00000000  000af277  2**0
+ 18 .debug_str    000cc5a0  00000000  00000000  000af305  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  0017b7ec  2**0
+ 19 .comment      00000053  00000000  00000000  0017b8a5  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00006dec  00000000  00000000  0017b840  2**2
+ 20 .debug_frame  00006e24  00000000  00000000  0017b8f8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -21225,8 +21225,8 @@ void CanOpenMenager(void *argument)
  8007cd8:	50001000 	.word	0x50001000
 
 08007cdc <setCanOpenID>:
-
 static CanOpenNodeID canOpenNodeID;
+static uint8_t buzzerOnOff;
 
 
 void setCanOpenID(void)
