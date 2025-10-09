@@ -1,0 +1,2 @@
+conf_inputs.c:37:6:setCanOpenID	8	static
+conf_inputs.c:53:9:getCanOpenID	8	static

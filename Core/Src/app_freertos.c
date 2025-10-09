@@ -27,9 +27,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "CO_app_STM32.h"
-
 #include "tim.h"
 #include "fdcan.h"
+#include "conf_inputs.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -147,11 +147,13 @@ void StartDefaultTask(void *argument)
 void CanOpenMenager(void *argument)
 {
   /* USER CODE BEGIN CanOpenMenager */
+  setCanOpenID();
+
   CANopenNodeSTM32 canOpenNodeSTM32;
   canOpenNodeSTM32.CANHandle = &hfdcan2;
   canOpenNodeSTM32.HWInitFunction = MX_FDCAN2_Init;
   canOpenNodeSTM32.timerHandle = &htim14;
-  canOpenNodeSTM32.desiredNodeID = 21;
+  canOpenNodeSTM32.desiredNodeID = getCanOpenID();
   canOpenNodeSTM32.baudrate = 125;
   canopen_app_init(&canOpenNodeSTM32);
   /* Infinite loop */
