@@ -30,6 +30,8 @@
 #include "tim.h"
 #include "fdcan.h"
 #include "conf_inputs.h"
+#include "NMT_functions.h"
+#include "OD.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -149,7 +151,6 @@ void CanOpenMenager(void *argument)
   /* USER CODE BEGIN CanOpenMenager */
   setCanOpenID();
 
-  CANopenNodeSTM32 canOpenNodeSTM32;
   canOpenNodeSTM32.CANHandle = &hfdcan2;
   canOpenNodeSTM32.HWInitFunction = MX_FDCAN2_Init;
   canOpenNodeSTM32.timerHandle = &htim14;
@@ -163,8 +164,8 @@ void CanOpenMenager(void *argument)
   {
 	  canOpenNodeSTM32.baudrate = 250;
   }
-
   canopen_app_init(&canOpenNodeSTM32);
+  CO_NMT_initCallbackChanged(canOpenNodeSTM32.canOpenStack->NMT, nmtStateChangedCallback);
   /* Infinite loop */
   for(;;)
   {
