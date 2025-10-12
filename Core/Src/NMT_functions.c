@@ -9,18 +9,10 @@
 #include "NMT_functions.h"
 #include "OD.h"
 
-typedef struct
-{
-	uint8_t InputFunctionID[6];
-	uint8_t inputValue;
-} VirtualInputMapping;
-
-static VirtualInputMapping virtualInputMapping[16];
-static uint8_t pendingVirtualInputMappings;
-
 void nmtStateChangedCallback(const CO_NMT_internalState_t state)
 {
 	CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
+	//if it is not operational reset configuration
 	if(state != CO_NMT_OPERATIONAL)
 	{
 		OD_entry_t *entry = OD_find(OD, 0x6200);
@@ -48,8 +40,8 @@ void nmtStateChangedCallback(const CO_NMT_internalState_t state)
 		CO_UNLOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 		return;
 	}
-
-	for(uint8_t i = 0; i < 16; ++i)
+//if it is operational clear pending input messages
+	for(uint8_t i = 0; i < VIRTUAL_INPUT_MAPPING_SIZE; ++i)
 	{
 		memset(virtualInputMapping[i].InputFunctionID, 0, sizeof(virtualInputMapping[i].InputFunctionID));
 		virtualInputMapping[i].inputValue = 0;

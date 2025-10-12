@@ -8,8 +8,7 @@
 #ifndef INC_NMT_FUNCTIONS_H_
 #define INC_NMT_FUNCTIONS_H_
 
-#include "CO_app_STM32.h"
-
+#include "canOpen_data.h"
 
 #endif /* INC_NMT_FUNCTIONS_H_ */
 

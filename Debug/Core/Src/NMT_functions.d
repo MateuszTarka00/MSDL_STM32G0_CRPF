@@ -1,7 +1,7 @@
 Core/Src/NMT_functions.o: ../Core/Src/NMT_functions.c \
- ../Core/Inc/NMT_functions.h ../Core/CANopenNode_STM32/CO_app_STM32.h \
- ../Core/CANopenNode/CANopen.h ../Core/CANopenNode/301/CO_driver.h \
- ../Core/CANopenNode/301/CO_config.h \
+ ../Core/Inc/NMT_functions.h ../Core/Inc/canOpen_data.h \
+ ../Core/CANopenNode_STM32/CO_app_STM32.h ../Core/CANopenNode/CANopen.h \
+ ../Core/CANopenNode/301/CO_driver.h ../Core/CANopenNode/301/CO_config.h \
  ../Core/CANopenNode_STM32/CO_driver_target.h ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Core/Inc/stm32g0xx_hal_conf.h \
@@ -55,6 +55,8 @@ Core/Src/NMT_functions.o: ../Core/Src/NMT_functions.c \
  ../Core/CANopenNode/extra/CO_trace.h ../Core/CANopenNode_STM32/OD.h
 
 ../Core/Inc/NMT_functions.h:
+
+../Core/Inc/canOpen_data.h:
 
 ../Core/CANopenNode_STM32/CO_app_STM32.h:
 

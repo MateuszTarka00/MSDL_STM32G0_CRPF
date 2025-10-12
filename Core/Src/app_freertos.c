@@ -32,6 +32,7 @@
 #include "conf_inputs.h"
 #include "NMT_functions.h"
 #include "OD.h"
+#include "IO_MappingFunctions.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -151,6 +152,15 @@ void CanOpenMenager(void *argument)
   /* USER CODE BEGIN CanOpenMenager */
   setCanOpenID();
 
+  OD_extension_t virtualInputMappingExtension = {0, virtualInputMappingRead, OD_writeOriginal, 0};
+  ODR_t result = OD_extension_init(OD_find(OD, 0x6010), &virtualInputMappingExtension);
+
+  OD_extension_t virtualOutputMappingExtension = {0, OD_readOriginal, virtualOutputMappingWrite, 0};
+  result = OD_extension_init(OD_find(OD, 0x6011), &virtualOutputMappingExtension);
+
+  OD_extension_t outputGroupExtension = {0, OD_readOriginal, outputGroupWrite, 0};
+  result  = OD_extension_init(OD_find(OD, 0x6200), &outputGroupExtension);
+
   canOpenNodeSTM32.CANHandle = &hfdcan2;
   canOpenNodeSTM32.HWInitFunction = MX_FDCAN2_Init;
   canOpenNodeSTM32.timerHandle = &htim14;
@@ -167,6 +177,7 @@ void CanOpenMenager(void *argument)
   canopen_app_init(&canOpenNodeSTM32);
   CO_NMT_initCallbackChanged(canOpenNodeSTM32.canOpenStack->NMT, nmtStateChangedCallback);
   /* Infinite loop */
+
   for(;;)
   {
 	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , !canOpenNodeSTM32.outStatusLEDGreen);
@@ -174,8 +185,9 @@ void CanOpenMenager(void *argument)
 
 	canopen_app_process();
 	osDelay(pdMS_TO_TICKS(1));
-    osDelay(1);
+	osDelay(1);
   }
+
   /* USER CODE END CanOpenMenager */
 }
 

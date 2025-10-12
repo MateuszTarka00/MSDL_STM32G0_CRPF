@@ -1,0 +1,4 @@
+IO_MappingFunctions.c:13:6:processFunctionData	16	static
+IO_MappingFunctions.c:18:7:virtualInputMappingRead	40	static
+IO_MappingFunctions.c:38:7:virtualOutputMappingWrite	112	static
+IO_MappingFunctions.c:81:7:outputGroupWrite	40	static

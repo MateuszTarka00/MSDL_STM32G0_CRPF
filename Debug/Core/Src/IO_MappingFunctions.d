@@ -1,14 +1,9 @@
-Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
- ../Core/Inc/FreeRTOSConfig.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
- ../Core/Inc/main.h ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
+Core/Src/IO_MappingFunctions.o: ../Core/Src/IO_MappingFunctions.c \
+ ../Core/Inc/IO_MappingFunctions.h \
+ ../Core/CANopenNode_STM32/CO_app_STM32.h ../Core/CANopenNode/CANopen.h \
+ ../Core/CANopenNode/301/CO_driver.h ../Core/CANopenNode/301/CO_config.h \
+ ../Core/CANopenNode_STM32/CO_driver_target.h ../Core/Inc/main.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Core/Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
@@ -38,11 +33,6 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/CANopenNode_STM32/CO_app_STM32.h ../Core/CANopenNode/CANopen.h \
- ../Core/CANopenNode/301/CO_driver.h ../Core/CANopenNode/301/CO_config.h \
- ../Core/CANopenNode_STM32/CO_driver_target.h \
  ../Core/CANopenNode/301/CO_ODinterface.h \
  ../Core/CANopenNode/301/CO_driver.h \
  ../Core/CANopenNode/301/CO_NMT_Heartbeat.h \
@@ -62,28 +52,20 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
  ../Core/CANopenNode/309/CO_gateway_ascii.h \
  ../Core/CANopenNode/301/CO_SDOclient.h \
  ../Core/CANopenNode/305/CO_LSSmaster.h ../Core/CANopenNode/303/CO_LEDs.h \
- ../Core/CANopenNode/extra/CO_trace.h ../Core/Inc/tim.h \
- ../Core/Inc/main.h ../Core/Inc/fdcan.h ../Core/Inc/conf_inputs.h \
- ../Core/Inc/NMT_functions.h ../Core/Inc/canOpen_data.h \
- ../Core/CANopenNode_STM32/OD.h ../Core/Inc/IO_MappingFunctions.h
+ ../Core/CANopenNode/extra/CO_trace.h ../Core/Inc/canOpen_data.h \
+ ../Core/CANopenNode_STM32/OD.h
 
-../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
+../Core/Inc/IO_MappingFunctions.h:
 
-../Core/Inc/FreeRTOSConfig.h:
+../Core/CANopenNode_STM32/CO_app_STM32.h:
 
-../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
+../Core/CANopenNode/CANopen.h:
 
-../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h:
+../Core/CANopenNode/301/CO_driver.h:
 
-../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h:
+../Core/CANopenNode/301/CO_config.h:
 
-../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h:
-
-../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h:
-
-../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
-
-../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
+../Core/CANopenNode_STM32/CO_driver_target.h:
 
 ../Core/Inc/main.h:
 
@@ -147,20 +129,6 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
 
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h:
 
-../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
-
-../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-
-../Core/CANopenNode_STM32/CO_app_STM32.h:
-
-../Core/CANopenNode/CANopen.h:
-
-../Core/CANopenNode/301/CO_driver.h:
-
-../Core/CANopenNode/301/CO_config.h:
-
-../Core/CANopenNode_STM32/CO_driver_target.h:
-
 ../Core/CANopenNode/301/CO_ODinterface.h:
 
 ../Core/CANopenNode/301/CO_driver.h:
@@ -215,18 +183,6 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
 
 ../Core/CANopenNode/extra/CO_trace.h:
 
-../Core/Inc/tim.h:
-
-../Core/Inc/main.h:
-
-../Core/Inc/fdcan.h:
-
-../Core/Inc/conf_inputs.h:
-
-../Core/Inc/NMT_functions.h:
-
 ../Core/Inc/canOpen_data.h:
 
 ../Core/CANopenNode_STM32/OD.h:
-
-../Core/Inc/IO_MappingFunctions.h:
