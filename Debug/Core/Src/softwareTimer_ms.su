@@ -1,0 +1,5 @@
+softwareTimer_ms.c:22:6:initSoftwareTimer	32	static
+softwareTimer_ms.c:51:6:deInitSoftwareTimer	24	static
+softwareTimer_ms.c:79:6:startSoftwareTimer	16	static
+softwareTimer_ms.c:85:6:stopSoftwareTimer	16	static
+softwareTimer_ms.c:91:6:timersHandler	16	static

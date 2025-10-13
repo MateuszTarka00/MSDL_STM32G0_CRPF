@@ -65,7 +65,8 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
  ../Core/CANopenNode/extra/CO_trace.h ../Core/Inc/tim.h \
  ../Core/Inc/main.h ../Core/Inc/fdcan.h ../Core/Inc/conf_inputs.h \
  ../Core/Inc/NMT_functions.h ../Core/Inc/canOpen_data.h \
- ../Core/CANopenNode_STM32/OD.h ../Core/Inc/IO_MappingFunctions.h
+ ../Core/CANopenNode_STM32/OD.h ../Core/Inc/IO_MappingFunctions.h \
+ ../Core/Inc/softwareTimer_ms.h
 
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -230,3 +231,5 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
 ../Core/CANopenNode_STM32/OD.h:
 
 ../Core/Inc/IO_MappingFunctions.h:
+
+../Core/Inc/softwareTimer_ms.h:

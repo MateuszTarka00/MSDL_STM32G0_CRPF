@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "CO_app_STM32.h"
+#include "softwareTimer_ms.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -190,6 +191,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if(htim == canopenNodeSTM32->timerHandle)
   {
 	  canopen_app_interrupt();
+	  timersHandler();
   }
   /* USER CODE END Callback 1 */
 }

@@ -1,0 +1,14 @@
+stm32g0xx_hal_rcc_ex.c:114:19:HAL_RCCEx_PeriphCLKConfig	40	static
+stm32g0xx_hal_rcc_ex.c:471:6:HAL_RCCEx_GetPeriphCLKConfig	20	static
+stm32g0xx_hal_rcc_ex.c:612:10:HAL_RCCEx_GetPeriphCLKFreq	16	static
+stm32g0xx_hal_rcc_ex.c:1218:6:HAL_RCCEx_EnableLSCO	56	static
+stm32g0xx_hal_rcc_ex.c:1265:6:HAL_RCCEx_DisableLSCO	24	static
+stm32g0xx_hal_rcc_ex.c:1372:6:HAL_RCCEx_CRSConfig	0	static
+stm32g0xx_hal_rcc_ex.c:1414:6:HAL_RCCEx_CRSSoftwareSynchronizationGenerate	0	static
+stm32g0xx_hal_rcc_ex.c:1424:6:HAL_RCCEx_CRSGetSynchronizationInfo	0	static
+stm32g0xx_hal_rcc_ex.c:1457:10:HAL_RCCEx_CRSWaitSynchronization	24	static
+stm32g0xx_hal_rcc_ex.c:1606:13:HAL_RCCEx_CRS_SyncOkCallback	0	static
+stm32g0xx_hal_rcc_ex.c:1617:13:HAL_RCCEx_CRS_SyncWarnCallback	0	static
+stm32g0xx_hal_rcc_ex.c:1628:13:HAL_RCCEx_CRS_ExpectedSyncCallback	0	static
+stm32g0xx_hal_rcc_ex.c:1644:13:HAL_RCCEx_CRS_ErrorCallback	0	static
+stm32g0xx_hal_rcc_ex.c:1541:6:HAL_RCCEx_CRS_IRQHandler	8	static

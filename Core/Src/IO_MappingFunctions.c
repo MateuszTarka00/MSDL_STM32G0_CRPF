@@ -10,6 +10,30 @@
 #include "canOpen_data.h"
 #include "OD.h"
 
+const uint16_t flashingDurations[] =
+{
+		50, 	//50 ms
+		67, 	//67 ms
+		100,	//100 ms
+		250,	//250 ms
+		333,	//333 ms
+		500,	//0.5 s
+		1000,	//1 s
+		2000,	//2 s
+};
+
+const uint16_t impulseDurations[] =
+{
+		500, 	//500 ms
+		1000,	//1 s
+		1500,	//1.5 s
+		2000,	//2 s
+		3000,	//3 s
+		5000,	//5 s
+		10000,	//10 s
+		15000,	//15 s
+};
+
 void processFunctionData(const uint8_t functionData)
 {
 

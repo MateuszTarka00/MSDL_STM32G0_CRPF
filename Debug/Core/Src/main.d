@@ -64,7 +64,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/CANopenNode/309/CO_gateway_ascii.h \
  ../Core/CANopenNode/301/CO_SDOclient.h \
  ../Core/CANopenNode/305/CO_LSSmaster.h ../Core/CANopenNode/303/CO_LEDs.h \
- ../Core/CANopenNode/extra/CO_trace.h
+ ../Core/CANopenNode/extra/CO_trace.h ../Core/Inc/softwareTimer_ms.h
 
 ../Core/Inc/main.h:
 
@@ -221,3 +221,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/CANopenNode/303/CO_LEDs.h:
 
 ../Core/CANopenNode/extra/CO_trace.h:
+
+../Core/Inc/softwareTimer_ms.h:
