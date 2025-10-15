@@ -9,35 +9,7 @@
 #include "IO_MappingFunctions.h"
 #include "canOpen_data.h"
 #include "OD.h"
-
-const uint16_t flashingDurations[] =
-{
-		50, 	//50 ms
-		67, 	//67 ms
-		100,	//100 ms
-		250,	//250 ms
-		333,	//333 ms
-		500,	//0.5 s
-		1000,	//1 s
-		2000,	//2 s
-};
-
-const uint16_t impulseDurations[] =
-{
-		500, 	//500 ms
-		1000,	//1 s
-		1500,	//1.5 s
-		2000,	//2 s
-		3000,	//3 s
-		5000,	//5 s
-		10000,	//10 s
-		15000,	//15 s
-};
-
-void processFunctionData(const uint8_t functionData)
-{
-
-}
+#include "DigitalOutput.h"
 
 ODR_t virtualInputMappingRead(OD_stream_t* const stream, void* const buffer, const OD_size_t size, OD_size_t* const bytesRead)
 {
@@ -118,8 +90,7 @@ ODR_t outputGroupWrite(OD_stream_t* const stream, const void* const buffer, cons
 		return ODR_OK;	// just ignore it...
 
 	const uint8_t *functionData = (const uint8_t *)buffer;
-	//distortos::board::digitalOutputs[subIndex - outputsShift - 1].processFunctionData(functionData);
-	processFunctionData(functionData[size - 1]);
+	processFunctionData(&digitaloutputs[size - 1], functionData[size - 1]);
 
 	return ODR_OK;
 }

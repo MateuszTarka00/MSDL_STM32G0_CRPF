@@ -8,6 +8,9 @@
 #ifndef INC_IO_MAPPINGFUNCTIONS_H_
 #define INC_IO_MAPPINGFUNCTIONS_H_
 
+#pragma once
+
+//#include "DigitalOutput.h"
 #include "CO_app_STM32.h"
 
 ODR_t virtualInputMappingRead(OD_stream_t* const stream, void* const buffer, const OD_size_t size, OD_size_t* const bytesRead);

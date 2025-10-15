@@ -1,6 +1,4 @@
 CO_ODinterface.h:588:21:OD_extension_init	16	static
 app_freertos.c:88:6:MX_FREERTOS_Init	8	static
 app_freertos.c:133:6:StartDefaultTask	16	static
-app_freertos.c:144:6:dupa1	16	static
-app_freertos.c:150:6:dupa2	16	static
-app_freertos.c:163:6:CanOpenMenager	120	static
+app_freertos.c:152:6:CanOpenMenager	88	static

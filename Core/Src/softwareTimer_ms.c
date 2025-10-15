@@ -19,12 +19,13 @@ typedef struct SoftwareTimersObject
 
 SoftwareTimersObject *timersObjectsList = 0;
 
-void initSoftwareTimer(SoftwareTimerHandler * timer, uint32_t period, void * callback, uint8_t repeat)
+void initSoftwareTimer(SoftwareTimerHandler * timer, uint32_t period, void * callback, uint8_t repeat, void *param)
 {
 	timer->callback = callback;
 	timer->period = period;
 	timer->repeat = repeat;
 	timer->ticks = 0;
+	timer->param = param;
 
 	SoftwareTimersObject *timerObject = (SoftwareTimersObject *)malloc(sizeof(SoftwareTimersObject));
 	timerObject->timerHandler = timer;
@@ -100,7 +101,8 @@ void timersHandler(void)
 
 			if(temp->timerHandler->ticks == temp->timerHandler->period)
 			{
-				((void (*)(void))temp->timerHandler->callback)();
+//				((void (*)(void))temp->timerHandler->callback)(temp->timerHandler->param);
+				temp->timerHandler->callback(temp->timerHandler->param);
 
 				if(!temp->timerHandler->repeat)
 				{
