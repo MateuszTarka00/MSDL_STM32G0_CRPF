@@ -34,6 +34,7 @@
 #include "OD.h"
 #include "IO_MappingFunctions.h"
 #include "softwareTimer_ms.h"
+#include "DigitalInputs.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -187,7 +188,6 @@ void CanOpenMenager(void *argument)
 
 	canopen_app_process();
 	osDelay(pdMS_TO_TICKS(1));
-	osDelay(1);
   }
 
   /* USER CODE END CanOpenMenager */

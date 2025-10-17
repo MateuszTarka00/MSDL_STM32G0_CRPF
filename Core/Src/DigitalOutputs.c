@@ -68,24 +68,27 @@ void toggleOutputPin(void * param)
 
 void processFunctionData(DigitalOutput *digitalOutput, const uint8_t functionData)
 {
-	stopSoftwareTimer(digitalOutput->timer);
+	deInitSoftwareTimer(digitalOutput->timer);
 	uint8_t property = (functionData >> 1) & 0b111;
 	uint8_t parameter = (functionData >> 4) & 0b111;
 	uint8_t state = (functionData & 1) != 0;
+	uint8_t repeat;
 	uint16_t duration = 0;
 
 	HAL_GPIO_WritePin(digitalOutput->port, digitalOutput->pin, state);
 
 	if(property == IMPULS_SIGNAL)
 	{
+		repeat = 0;
 		duration = impulseDurations[parameter];
 	}
 	else if(property == FLASHING_SIGNAL)
 	{
+		repeat = 1;
 		duration = flashingDurations[parameter];
 	}
 
-	initSoftwareTimer(digitalOutput->timer, duration, toggleOutputPin, 0, digitalOutput);
+	initSoftwareTimer(digitalOutput->timer, duration, toggleOutputPin, repeat, digitalOutput);
 	startSoftwareTimer(digitalOutput->timer);
 
 }
