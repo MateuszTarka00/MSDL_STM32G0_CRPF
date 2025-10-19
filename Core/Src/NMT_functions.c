@@ -44,7 +44,7 @@ void nmtStateChangedCallback(const CO_NMT_internalState_t state)
 	for(uint8_t i = 0; i < VIRTUAL_INPUT_MAPPING_SIZE; ++i)
 	{
 		memset(virtualInputMapping[i].InputFunctionID, 0, sizeof(virtualInputMapping[i].InputFunctionID));
-		virtualInputMapping[i].inputValue = 0;
+		virtualInputMapping[i].pending = 0;
 	}
 
 	pendingVirtualInputMappings = 0;

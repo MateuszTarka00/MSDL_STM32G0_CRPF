@@ -19,7 +19,7 @@
 typedef struct
 {
 	uint8_t InputFunctionID[6];
-	uint8_t inputValue;
+	uint8_t pending;
 } VirtualInputMapping;
 
 VirtualInputMapping virtualInputMapping[VIRTUAL_INPUT_MAPPING_SIZE];

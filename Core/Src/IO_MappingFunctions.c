@@ -18,9 +18,9 @@ ODR_t virtualInputMappingRead(OD_stream_t* const stream, void* const buffer, con
 		for(uint8_t i = 0; i < VIRTUAL_INPUT_MAPPING_SIZE; ++i)
 		{
 			//find first pending input
-			if(virtualInputMapping[i].inputValue)
+			if(virtualInputMapping[i].pending)
 			{
-				virtualInputMapping[i].inputValue = 0; //Clear pending input
+				virtualInputMapping[i].pending = 0; //Clear pending input
 				--pendingVirtualInputMappings; //Decrease pending inputs count
 
 				memcpy(stream->dataOrig, virtualInputMapping[i].InputFunctionID, sizeof(virtualInputMapping[i].InputFunctionID));

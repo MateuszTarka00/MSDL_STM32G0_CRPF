@@ -49,7 +49,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define CANOPEN_TASK_DELAY_MS 20
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -181,13 +181,64 @@ void CanOpenMenager(void *argument)
   CO_NMT_initCallbackChanged(canOpenNodeSTM32.canOpenStack->NMT, nmtStateChangedCallback);
   /* Infinite loop */
 
+  const OD_entry_t *entry = OD_find(OD, 0x6100);
+
   for(;;)
   {
 	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , !canOpenNodeSTM32.outStatusLEDGreen);
 	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, !canOpenNodeSTM32.outStatusLEDRed);
 
 	canopen_app_process();
-	osDelay(pdMS_TO_TICKS(1));
+
+	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6100; ++subIndex)
+	{
+		OD_IO_t io;
+		{
+			result = OD_getSub(entry, subIndex, &io, 0);
+		}
+		CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
+
+		//check if input is enabled
+		uint8_t enabledInput = 0;
+		uint8_t *identifier = (uint8_t *)io.stream.dataOrig;
+		uint8_t state = 0;
+
+		for(uint8_t i = 0; i < 5; ++i)
+		{
+			if(identifier[i])
+			{
+				enabledInput = 1;
+				break;
+			}
+		}
+
+		if(enabledInput)
+		{
+			state = HAL_GPIO_ReadPin(digitalInput[subIndex - 1].port, digitalInput[subIndex - 1].pin);
+			identifier[5] = state;
+		}
+
+		if(virtualInputMapping[subIndex - 1].pending) //check if already pending
+		{
+			continue;
+		}
+
+		// check if input has changed
+		uint8_t inputChanged = memcmp(virtualInputMapping[subIndex - 1].InputFunctionID, identifier, sizeof(virtualInputMapping[subIndex - 1].InputFunctionID)) != 0;
+
+		if(inputChanged)
+		{
+			continue;
+		}
+
+		memcpy(virtualInputMapping[subIndex - 1].InputFunctionID, identifier, sizeof(virtualInputMapping[subIndex - 1].InputFunctionID));
+		virtualInputMapping[subIndex - 1].pending = 1;
+		++pendingVirtualInputMappings;
+
+		CO_UNLOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
+	}
+
+	osDelay(pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
   }
 
   /* USER CODE END CanOpenMenager */

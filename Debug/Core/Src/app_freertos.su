@@ -1,4 +1,4 @@
 CO_ODinterface.h:588:21:OD_extension_init	16	static
-app_freertos.c:88:6:MX_FREERTOS_Init	8	static
-app_freertos.c:133:6:StartDefaultTask	16	static
-app_freertos.c:152:6:CanOpenMenager	88	static
+app_freertos.c:89:6:MX_FREERTOS_Init	8	static
+app_freertos.c:134:6:StartDefaultTask	16	static
+app_freertos.c:153:6:CanOpenMenager	136	static,ignoring_inline_asm
