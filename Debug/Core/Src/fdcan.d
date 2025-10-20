@@ -29,7 +29,7 @@ Core/Src/fdcan.o: ../Core/Src/fdcan.c ../Core/Inc/fdcan.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
- ../Core/Inc/conf_inputs.h
+ ../Core/Inc/main.h ../Core/Inc/conf_inputs.h
 
 ../Core/Inc/fdcan.h:
 
@@ -94,5 +94,7 @@ Core/Src/fdcan.o: ../Core/Src/fdcan.c ../Core/Inc/fdcan.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h:
 
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h:
+
+../Core/Inc/main.h:
 
 ../Core/Inc/conf_inputs.h:

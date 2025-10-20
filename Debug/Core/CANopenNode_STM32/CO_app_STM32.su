@@ -1,4 +1,4 @@
-CO_app_STM32.c:60:1:canopen_app_init	24	static
-CO_app_STM32.c:114:1:canopen_app_resetCommunication	72	static
-CO_app_STM32.c:202:1:canopen_app_process	24	static
-CO_app_STM32.c:232:1:canopen_app_interrupt	24	static,ignoring_inline_asm
+CO_app_STM32.c:58:1:canopen_app_init	24	static
+CO_app_STM32.c:112:1:canopen_app_resetCommunication	72	static
+CO_app_STM32.c:200:1:canopen_app_process	24	static
+CO_app_STM32.c:230:1:canopen_app_interrupt	24	static,ignoring_inline_asm

@@ -19,10 +19,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "fdcan.h"
-#include "conf_inputs.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "main.h"
+#include "conf_inputs.h"
 /* USER CODE END 0 */
 
 FDCAN_HandleTypeDef hfdcan1;
