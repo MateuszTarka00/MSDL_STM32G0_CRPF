@@ -16,5 +16,7 @@
 void setCanOpenID(void);
 uint8_t getCanOpenID(void);
 uint8_t getCanOpenBaudRate(void);
+void readBuzzerInput(void);
+uint8_t getBuzzerOnOff(void);
 
 #endif /* INC_CONF_INPUTS_H_ */

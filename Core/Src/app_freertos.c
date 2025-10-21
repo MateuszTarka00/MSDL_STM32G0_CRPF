@@ -35,6 +35,7 @@
 #include "IO_MappingFunctions.h"
 #include "softwareTimer_ms.h"
 #include "DigitalInputs.h"
+#include "DigitalOutput.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,8 +50,9 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-#define CANOPEN_TASK_DELAY_MS 			20
+#define CANOPEN_TASK_DELAY_MS 			1
 #define TPDO_REQUESTER_TASK_DELAY_MS 	1
+#define INPUT_CHECK_TASK_DELAY_MS		20
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -71,6 +73,13 @@ const osThreadAttr_t CanOpenMenagerT_attributes = {
   .priority = (osPriority_t) osPriorityNormal3,
   .stack_size = 1024 * 4
 };
+/* Definitions for InputCheckT */
+osThreadId_t InputCheckTHandle;
+const osThreadAttr_t InputCheckT_attributes = {
+  .name = "InputCheckT",
+  .priority = (osPriority_t) osPriorityNormal2,
+  .stack_size = 512 * 4
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -79,6 +88,7 @@ const osThreadAttr_t CanOpenMenagerT_attributes = {
 
 void tpdoRequester(void *argument);
 void CanOpenMenager(void *argument);
+void InputCheck(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -179,6 +189,9 @@ void MX_FREERTOS_Init(void) {
   /* creation of CanOpenMenagerT */
   CanOpenMenagerTHandle = osThreadNew(CanOpenMenager, NULL, &CanOpenMenagerT_attributes);
 
+  /* creation of InputCheckT */
+  InputCheckTHandle = osThreadNew(InputCheck, NULL, &InputCheckT_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -203,6 +216,7 @@ void tpdoRequester(void *argument)
   /* Infinite loop */
   for(;;)
   {
+//	  HAL_IWDG_Refresh(&hiwdg);
 	  osDelay(pdMS_TO_TICKS(TPDO_REQUESTER_TASK_DELAY_MS));
 	  CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
@@ -238,10 +252,12 @@ void tpdoRequester(void *argument)
 * @retval None
 */
 /* USER CODE END Header_CanOpenMenager */
+
 void CanOpenMenager(void *argument)
 {
   /* USER CODE BEGIN CanOpenMenager */
   setCanOpenID();
+  readBuzzerInput();
 
   OD_extension_t virtualInputMappingExtension = {0, virtualInputMappingRead, OD_writeOriginal, 0};
   ODR_t result = OD_extension_init(OD_find(OD, 0x6010), &virtualInputMappingExtension);
@@ -268,21 +284,41 @@ void CanOpenMenager(void *argument)
   canopen_app_init(&canOpenNodeSTM32);
   CO_NMT_initCallbackChanged(canOpenNodeSTM32.canOpenStack->NMT, nmtStateChangedCallback);
   /* Infinite loop */
-
-  const OD_entry_t *entry = OD_find(OD, 0x6100);
-
   for(;;)
   {
+//    HAL_IWDG_Refresh(&hiwdg);
 	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , !canOpenNodeSTM32.outStatusLEDGreen);
 	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, !canOpenNodeSTM32.outStatusLEDRed);
 
 	canopen_app_process();
 
+	osDelay(pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
+  }
+
+  /* USER CODE END CanOpenMenager */
+}
+
+/* USER CODE BEGIN Header_InputCheck */
+/**
+* @brief Function implementing the InputCheckT thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_InputCheck */
+void InputCheck(void *argument)
+{
+  /* USER CODE BEGIN InputCheck */
+  /* Infinite loop */
+  const OD_entry_t *entry = OD_find(OD, 0x6100);
+
+  for(;;)
+  {
+//	HAL_IWDG_Refresh(&hiwdg);
 	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6100; ++subIndex)
 	{
 		OD_IO_t io;
 		{
-			result = OD_getSub(entry, subIndex, &io, 0);
+			ODR_t result = OD_getSub(entry, subIndex, &io, 0);
 		}
 		CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
@@ -312,7 +348,7 @@ void CanOpenMenager(void *argument)
 		}
 
 		// check if input has changed
-		uint8_t inputChanged = memcmp(virtualInputMapping[subIndex - 1].InputFunctionID, identifier, sizeof(virtualInputMapping[subIndex - 1].InputFunctionID)) != 0;
+		uint8_t inputChanged = memcmp(virtualInputMapping[subIndex - 1].InputFunctionID, identifier, sizeof(virtualInputMapping[subIndex - 1].InputFunctionID)) == 0;
 
 		if(inputChanged)
 		{
@@ -324,12 +360,16 @@ void CanOpenMenager(void *argument)
 		++pendingVirtualInputMappings;
 
 		CO_UNLOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
+
+		if((subIndex == 1 || subIndex == 2) && getBuzzerOnOff())
+		{
+			HAL_GPIO_WritePin(BUZZER_OUT_GPIO_Port, BUZZER_OUT_Pin, state);
+		}
 	}
 
-	osDelay(pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
+    osDelay(pdMS_TO_TICKS(INPUT_CHECK_TASK_DELAY_MS));
   }
-
-  /* USER CODE END CanOpenMenager */
+  /* USER CODE END InputCheck */
 }
 
 /* Private application code --------------------------------------------------*/

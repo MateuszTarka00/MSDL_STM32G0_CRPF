@@ -93,7 +93,6 @@ int main(void)
   MX_FDCAN2_Init();
   MX_FDCAN1_Init();
   MX_TIM14_Init();
-  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -192,12 +191,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if(htim == canopenNodeSTM32->timerHandle)
   {
 	  canopen_app_interrupt();
-  }
-
-  if(htim == &htim16)
-  {
 	  timersHandler();
   }
+
   /* USER CODE END Callback 1 */
 }
 

@@ -24,6 +24,7 @@ ODR_t virtualInputMappingRead(OD_stream_t* const stream, void* const buffer, con
 				--pendingVirtualInputMappings; //Decrease pending inputs count
 
 				memcpy(stream->dataOrig, virtualInputMapping[i].InputFunctionID, sizeof(virtualInputMapping[i].InputFunctionID));
+				break;
 			}
 		}
 	}

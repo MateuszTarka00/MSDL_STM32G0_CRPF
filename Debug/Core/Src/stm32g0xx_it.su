@@ -1,6 +1,6 @@
-stm32g0xx_it.c:75:6:NMI_Handler	8	static
-stm32g0xx_it.c:90:6:HardFault_Handler	8	static
-stm32g0xx_it.c:112:6:TIM1_BRK_UP_TRG_COM_IRQHandler	8	static
-stm32g0xx_it.c:126:6:TIM14_IRQHandler	8	static
-stm32g0xx_it.c:140:6:TIM16_FDCAN_IT0_IRQHandler	8	static
-stm32g0xx_it.c:156:6:TIM17_FDCAN_IT1_IRQHandler	8	static
+stm32g0xx_it.c:74:6:NMI_Handler	8	static
+stm32g0xx_it.c:89:6:HardFault_Handler	8	static
+stm32g0xx_it.c:111:6:TIM1_BRK_UP_TRG_COM_IRQHandler	8	static
+stm32g0xx_it.c:125:6:TIM14_IRQHandler	8	static
+stm32g0xx_it.c:139:6:TIM16_FDCAN_IT0_IRQHandler	8	static
+stm32g0xx_it.c:154:6:TIM17_FDCAN_IT1_IRQHandler	8	static

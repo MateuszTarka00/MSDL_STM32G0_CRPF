@@ -84,15 +84,18 @@ void processFunctionData(DigitalOutput *digitalOutput, const uint8_t functionDat
 	{
 		repeat = 0;
 		duration = impulseDurations[parameter];
+
+		initSoftwareTimer(digitalOutput->timer, duration, toggleOutputPin, repeat, digitalOutput);
+		startSoftwareTimer(digitalOutput->timer);
 	}
 	else if(property == FLASHING_SIGNAL)
 	{
 		repeat = 1;
 		duration = flashingDurations[parameter];
-	}
 
-	initSoftwareTimer(digitalOutput->timer, duration, toggleOutputPin, repeat, digitalOutput);
-	startSoftwareTimer(digitalOutput->timer);
+		initSoftwareTimer(digitalOutput->timer, duration, toggleOutputPin, repeat, digitalOutput);
+		startSoftwareTimer(digitalOutput->timer);
+	}
 
 	//exit critical section
 	HAL_NVIC_EnableIRQ(TIM14_IRQn);

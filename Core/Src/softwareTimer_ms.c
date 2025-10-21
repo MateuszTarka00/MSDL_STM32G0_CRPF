@@ -21,6 +21,17 @@ SoftwareTimersObject *timersObjectsList = 0;
 
 void initSoftwareTimer(SoftwareTimerHandler * timer, uint32_t period, void * callback, uint8_t repeat, void *param)
 {
+	SoftwareTimersObject *current = timersObjectsList;
+
+    while (current != NULL)
+    {
+        if (current->timerHandler == timer)
+        {
+            return;
+        }
+        current = current->nextObject;
+    }
+
 	timer->callback = callback;
 	timer->period = period;
 	timer->repeat = repeat;
@@ -34,6 +45,7 @@ void initSoftwareTimer(SoftwareTimerHandler * timer, uint32_t period, void * cal
 	if(timersObjectsList == 0)
 	{
 		timersObjectsList = timerObject;
+		timersObjectsList->nextObject = 0;
 	}
 	else
 	{
@@ -51,20 +63,18 @@ void initSoftwareTimer(SoftwareTimerHandler * timer, uint32_t period, void * cal
 
 void deInitSoftwareTimer(SoftwareTimerHandler * timer)
 {
+    if (timer == 0 || timersObjectsList == 0)
+        return;
+
 	timer->callback = 0;
 	timer->period = 0;
 	timer->repeat = 0;
 	timer->ticks = 0;
 
-	if(timersObjectsList == 0)
-	{
-		return;
-	}
-
 	SoftwareTimersObject *temp = timersObjectsList;
 	SoftwareTimersObject *prev = 0;
 
-	while(temp->timerHandler == timer && temp == 0)
+	while(temp != 0 && temp->timerHandler != timer)
 	{
 		prev = temp;
 		temp = temp->nextObject;
@@ -72,7 +82,15 @@ void deInitSoftwareTimer(SoftwareTimerHandler * timer)
 
 	if(temp == 0) return;
 
-	prev->nextObject = temp->nextObject;
+	if(prev == 0)
+	{
+		timersObjectsList = temp->nextObject;
+	}
+	else
+	{
+		prev->nextObject = temp->nextObject;
+	}
+
 	free(temp);
 
 }
