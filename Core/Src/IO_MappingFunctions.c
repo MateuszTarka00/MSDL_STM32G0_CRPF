@@ -57,7 +57,7 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 			result = io.read(&io.stream, identifier, sizeof(identifier), &bytesRead);
 		}
 
-		if(memcmp(identifier, buffer, size - 1) == 0)
+		if(memcmp(identifier, buffer, size - 1))
 		{
 			continue;
 		}
