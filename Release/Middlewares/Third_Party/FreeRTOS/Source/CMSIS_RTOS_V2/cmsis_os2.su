@@ -71,5 +71,10 @@ cmsis_os2.c:2229:10:osMemoryPoolGetBlockSize	0	static
 cmsis_os2.c:2253:10:osMemoryPoolGetCount	8	static,ignoring_inline_asm
 cmsis_os2.c:2283:10:osMemoryPoolGetSpace	8	static,ignoring_inline_asm
 cmsis_os2.c:2311:12:osMemoryPoolDelete	8	static,ignoring_inline_asm
+cmsis_os2.c:2414:13:vApplicationIdleHook	0	static
+cmsis_os2.c:2421:14:vApplicationTickHook	0	static
+cmsis_os2.c:2428:13:vApplicationMallocFailedHook	0	static
+cmsis_os2.c:2435:13:vApplicationDaemonTaskStartupHook	0	static
+cmsis_os2.c:2442:13:vApplicationStackOverflowHook	0	static,ignoring_inline_asm
 cmsis_os2.c:2459:13:vApplicationGetIdleTaskMemory	0	static
 cmsis_os2.c:2473:13:vApplicationGetTimerTaskMemory	0	static

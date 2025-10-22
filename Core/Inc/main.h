@@ -134,10 +134,10 @@ void Error_Handler(void);
 #define IN15_GPIO_Port GPIOD
 #define IN16_Pin GPIO_PIN_10
 #define IN16_GPIO_Port GPIOD
-#define CAN_FAULT_Pin GPIO_PIN_2
-#define CAN_FAULT_GPIO_Port GPIOE
-#define CAN_OK_Pin GPIO_PIN_3
+#define CAN_OK_Pin GPIO_PIN_2
 #define CAN_OK_GPIO_Port GPIOE
+#define CAN_FAULT_Pin GPIO_PIN_3
+#define CAN_FAULT_GPIO_Port GPIOE
 #define OUT1_Pin GPIO_PIN_6
 #define OUT1_GPIO_Port GPIOB
 #define OUT2_Pin GPIO_PIN_7

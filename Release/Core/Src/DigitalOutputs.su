@@ -1,0 +1,2 @@
+DigitalOutputs.c:62:6:toggleOutputPin	8	static
+DigitalOutputs.c:69:6:processFunctionData	40	static

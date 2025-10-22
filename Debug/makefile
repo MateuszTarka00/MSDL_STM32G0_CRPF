@@ -78,6 +78,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 MSDL_STM32G0_CRPF.list \
 
+OBJCOPY_HEX += \
+MSDL_STM32G0_CRPF.hex \
+
 OBJCOPY_BIN += \
 MSDL_STM32G0_CRPF.bin \
 
@@ -104,6 +107,11 @@ MSDL_STM32G0_CRPF.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEP
 	@echo 'Finished building: $@'
 	@echo ' '
 
+MSDL_STM32G0_CRPF.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "MSDL_STM32G0_CRPF.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 MSDL_STM32G0_CRPF.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "MSDL_STM32G0_CRPF.bin"
 	@echo 'Finished building: $@'
@@ -114,7 +122,7 @@ clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

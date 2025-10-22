@@ -25,6 +25,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_fdcan.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_iwdg.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h \
@@ -40,10 +41,10 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/Inc/fdcan.h ../Core/Inc/main.h ../Core/Inc/tim.h \
- ../Core/Inc/gpio.h ../Core/CANopenNode_STM32/CO_app_STM32.h \
- ../Core/CANopenNode/CANopen.h ../Core/CANopenNode/301/CO_driver.h \
- ../Core/CANopenNode/301/CO_config.h \
+ ../Core/Inc/fdcan.h ../Core/Inc/main.h ../Core/Inc/iwdg.h \
+ ../Core/Inc/tim.h ../Core/Inc/gpio.h \
+ ../Core/CANopenNode_STM32/CO_app_STM32.h ../Core/CANopenNode/CANopen.h \
+ ../Core/CANopenNode/301/CO_driver.h ../Core/CANopenNode/301/CO_config.h \
  ../Core/CANopenNode_STM32/CO_driver_target.h \
  ../Core/CANopenNode/301/CO_ODinterface.h \
  ../Core/CANopenNode/301/CO_driver.h \
@@ -120,6 +121,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_fdcan.h:
 
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_iwdg.h:
+
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h:
 
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h:
@@ -153,6 +156,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/fdcan.h:
 
 ../Core/Inc/main.h:
+
+../Core/Inc/iwdg.h:
 
 ../Core/Inc/tim.h:
 

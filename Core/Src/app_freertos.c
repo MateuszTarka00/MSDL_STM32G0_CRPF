@@ -36,6 +36,7 @@
 #include "softwareTimer_ms.h"
 #include "DigitalInputs.h"
 #include "DigitalOutput.h"
+#include "iwdg.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +54,9 @@
 #define CANOPEN_TASK_DELAY_MS 			1
 #define TPDO_REQUESTER_TASK_DELAY_MS 	1
 #define INPUT_CHECK_TASK_DELAY_MS		20
+
+#define COB_ID_ZERO						0x480
+#define TPDO_INDEX						0x1800
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -216,7 +220,7 @@ void tpdoRequester(void *argument)
   /* Infinite loop */
   for(;;)
   {
-//	  HAL_IWDG_Refresh(&hiwdg);
+	  HAL_IWDG_Refresh(&hiwdg);
 	  osDelay(pdMS_TO_TICKS(TPDO_REQUESTER_TASK_DELAY_MS));
 	  CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
@@ -252,7 +256,6 @@ void tpdoRequester(void *argument)
 * @retval None
 */
 /* USER CODE END Header_CanOpenMenager */
-
 void CanOpenMenager(void *argument)
 {
   /* USER CODE BEGIN CanOpenMenager */
@@ -281,14 +284,37 @@ void CanOpenMenager(void *argument)
   {
 	  canOpenNodeSTM32.baudrate = 250;
   }
+
+  uint32_t correctTpdo1CobId = COB_ID_ZERO + getCanOpenID();
+
+  //Set COB-ID for TPDO
+  OD_entry_t *tpdoCommEntry = OD_find(OD, TPDO_INDEX);
+  if (tpdoCommEntry != NULL) {
+      OD_IO_t io;
+
+      // Get subindex 1 — COB-ID
+      if (OD_getSub(tpdoCommEntry, 1, &io, 0) == ODR_OK) {
+          uint32_t *cobIdPtr = (uint32_t *)io.stream.dataOrig;
+
+          // Disable PDO temporarily (set bit 31)
+          *cobIdPtr |= 0x80000000;
+
+          // Update COB-ID
+          *cobIdPtr = correctTpdo1CobId;
+
+          // Re-enable PDO (clear bit 31)
+          *cobIdPtr &= ~0x80000000;
+      }
+  }
+
   canopen_app_init(&canOpenNodeSTM32);
   CO_NMT_initCallbackChanged(canOpenNodeSTM32.canOpenStack->NMT, nmtStateChangedCallback);
   /* Infinite loop */
   for(;;)
   {
-//    HAL_IWDG_Refresh(&hiwdg);
-	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , !canOpenNodeSTM32.outStatusLEDGreen);
-	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, !canOpenNodeSTM32.outStatusLEDRed);
+    HAL_IWDG_Refresh(&hiwdg);
+	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , canOpenNodeSTM32.outStatusLEDGreen);
+	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, canOpenNodeSTM32.outStatusLEDRed);
 
 	canopen_app_process();
 
@@ -313,7 +339,7 @@ void InputCheck(void *argument)
 
   for(;;)
   {
-//	HAL_IWDG_Refresh(&hiwdg);
+	HAL_IWDG_Refresh(&hiwdg);
 	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6100; ++subIndex)
 	{
 		OD_IO_t io;
