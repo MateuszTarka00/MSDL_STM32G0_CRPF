@@ -91,7 +91,7 @@ ODR_t outputGroupWrite(OD_stream_t* const stream, const void* const buffer, cons
 		return ODR_OK;	// just ignore it...
 
 	const uint8_t *functionData = (const uint8_t *)buffer;
-	processFunctionData(&digitaloutputs[size - 1], functionData[size - 1]);
+	processFunctionData(&digitaloutputs[subIndex - 1], functionData[subIndex - 1]);
 
 	return ODR_OK;
 }
