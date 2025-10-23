@@ -10,9 +10,9 @@
 
 #include "main.h"
 
-#define CANOPEN_BAUDRATE_125   0
-#define CANOPEN_BAUDRATE_250   1
-#define DEFAULT_NODE_ID			  0x21
+#define CANOPEN_BAUDRATE_125   	0
+#define CANOPEN_BAUDRATE_250   	1
+#define DEFAULT_NODE_ID			21
 
 void setCanOpenID(void);
 uint8_t getCanOpenID(void);
