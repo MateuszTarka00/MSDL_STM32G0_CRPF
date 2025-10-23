@@ -45,6 +45,8 @@ void setCanOpenID(void)
 	canOpenNodeID.id_3 = !HAL_GPIO_ReadPin(ADD_S3_GPIO_Port, ADD_S3_Pin);
 	canOpenNodeID.id_4 = !HAL_GPIO_ReadPin(ADD_S4_GPIO_Port, ADD_S4_Pin);
 	canOpenNodeID.id_5 = !HAL_GPIO_ReadPin(ADD_S5_GPIO_Port, ADD_S5_Pin);
+
+	canOpenNodeID.nodeID += DEFAULT_NODE_ID;
 }
 
 /**
