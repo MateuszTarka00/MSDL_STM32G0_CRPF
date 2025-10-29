@@ -8,10 +8,18 @@
 
 #include "NMT_functions.h"
 #include "OD.h"
+#include "flash.h"
+
+#define FLASH_PAGE 255
 
 void nmtStateChangedCallback(const CO_NMT_internalState_t state)
 {
 	CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
+
+	if(state == CO_NMT_PRE_OPERATIONAL)
+	{
+		Flash_ReadStruct(FLASH_PAGE, &flash_virtualInputOutput);
+	}
 	//if it is not operational reset configuration
 	if(state != CO_NMT_OPERATIONAL)
 	{

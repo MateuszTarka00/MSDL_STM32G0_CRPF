@@ -10,9 +10,17 @@
 
 #include "main.h"
 
+typedef struct
+{
+	uint8_t virtualInputs[16][6];
+	uint8_t virtualOutputs[16][6];
+}Flash_virtualInputOutput;
+
+extern Flash_virtualInputOutput flash_virtualInputOutput;
+
 void Flash_ErasePage(uint32_t pageIndex);
-void Flash_WriteStruct(uint32_t pageIndex, const ConfigData_t *data);
-void Flash_ReadStruct(uint32_t pageIndex, ConfigData_t *data);
+void Flash_WriteStruct(uint32_t pageIndex, const Flash_virtualInputOutput *data);
+void Flash_ReadStruct(uint32_t pageIndex, Flash_virtualInputOutput *data);
 uint32_t Flash_GetPageAddress(uint32_t pageIndex);
 
 
