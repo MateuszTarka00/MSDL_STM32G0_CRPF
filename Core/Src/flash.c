@@ -61,3 +61,22 @@ void Flash_ReadStruct(uint32_t pageIndex, Flash_virtualInputOutput *data)
 {
     memcpy(data, (const void *)Flash_GetPageAddress(pageIndex), sizeof(Flash_virtualInputOutput));
 }
+
+uint8_t checkStructEmpty(const Flash_virtualInputOutput *data)
+{
+	const uint8_t *src = (const uint8_t *)data;
+
+	for(uint16_t i = 0; i < sizeof(*data); ++i)
+	{
+		if(*src != 0xFF)
+		{
+			return 0;
+		}
+
+		src++;
+	}
+	return 1;
+}
+
+
+

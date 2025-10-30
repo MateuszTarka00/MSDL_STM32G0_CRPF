@@ -22,6 +22,7 @@ void Flash_ErasePage(uint32_t pageIndex);
 void Flash_WriteStruct(uint32_t pageIndex, const Flash_virtualInputOutput *data);
 void Flash_ReadStruct(uint32_t pageIndex, Flash_virtualInputOutput *data);
 uint32_t Flash_GetPageAddress(uint32_t pageIndex);
+uint8_t checkStructEmpty(const Flash_virtualInputOutput *data);
 
 
 #endif /* INC_FLASH_H_ */
