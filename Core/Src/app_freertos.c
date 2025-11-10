@@ -57,6 +57,8 @@
 
 #define COB_ID_ZERO						0x480
 #define TPDO_INDEX						0x1800
+
+#define BUZZER_TIME						100 //ms
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -220,7 +222,7 @@ void tpdoRequester(void *argument)
   /* Infinite loop */
   for(;;)
   {
-//	  HAL_IWDG_Refresh(&hiwdg);
+	  HAL_IWDG_Refresh(&hiwdg);
 	  osDelay(pdMS_TO_TICKS(TPDO_REQUESTER_TASK_DELAY_MS));
 	  CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
@@ -312,7 +314,7 @@ void CanOpenMenager(void *argument)
   /* Infinite loop */
   for(;;)
   {
-//    HAL_IWDG_Refresh(&hiwdg);
+    HAL_IWDG_Refresh(&hiwdg);
 	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , canOpenNodeSTM32.outStatusLEDGreen);
 	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, canOpenNodeSTM32.outStatusLEDRed);
 
@@ -336,12 +338,22 @@ void InputCheck(void *argument)
   /* USER CODE BEGIN InputCheck */
   /* Infinite loop */
   const OD_entry_t *entry = OD_find(OD, 0x6100);
+  static uint16_t buzzer_counter = 0;
 
   for(;;)
   {
-//	HAL_IWDG_Refresh(&hiwdg);
+	HAL_IWDG_Refresh(&hiwdg);
 	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6100; ++subIndex)
 	{
+		if(!buzzer_counter)
+		{
+			HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
+		}
+		else
+		{
+			buzzer_counter--;
+		}
+
 		OD_IO_t io;
 		{
 			ODR_t result = OD_getSub(entry, subIndex, &io, 0);
@@ -368,11 +380,6 @@ void InputCheck(void *argument)
 			identifier[5] = state;
 		}
 
-		if(virtualInputMapping[subIndex - 1].pending) //check if already pending
-		{
-			continue;
-		}
-
 		// check if input has changed
 		uint8_t inputChanged = memcmp(virtualInputMapping[subIndex - 1].InputFunctionID, identifier, sizeof(virtualInputMapping[subIndex - 1].InputFunctionID)) == 0;
 
@@ -382,15 +389,23 @@ void InputCheck(void *argument)
 		}
 
 		memcpy(virtualInputMapping[subIndex - 1].InputFunctionID, identifier, sizeof(virtualInputMapping[subIndex - 1].InputFunctionID));
+
+		if((subIndex == 1 || subIndex == 2) && getBuzzerOnOff() && state)
+		{
+			HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
+			buzzer_counter = BUZZER_TIME;
+		}
+
+		if(virtualInputMapping[subIndex - 1].pending) //check if already pending
+		{
+			continue;
+		}
+
 		virtualInputMapping[subIndex - 1].pending = 1;
 		++pendingVirtualInputMappings;
 
 		CO_UNLOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
-		if((subIndex == 1 || subIndex == 2) && getBuzzerOnOff())
-		{
-			HAL_GPIO_WritePin(BUZZER_OUT_GPIO_Port, BUZZER_OUT_Pin, state);
-		}
 	}
 
     osDelay(pdMS_TO_TICKS(INPUT_CHECK_TASK_DELAY_MS));

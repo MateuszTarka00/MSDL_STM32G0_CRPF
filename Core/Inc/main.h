@@ -84,6 +84,8 @@ void Error_Handler(void);
 #define OUT6_GPIO_Port GPIOA
 #define OUT7_Pin GPIO_PIN_4
 #define OUT7_GPIO_Port GPIOA
+#define DISPLAY_TX_Pin GPIO_PIN_4
+#define DISPLAY_TX_GPIO_Port GPIOC
 #define OUT8_Pin GPIO_PIN_5
 #define OUT8_GPIO_Port GPIOC
 #define OUT9_Pin GPIO_PIN_0
