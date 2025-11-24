@@ -28,6 +28,8 @@
 FDCAN_HandleTypeDef hfdcan1;
 FDCAN_HandleTypeDef hfdcan2;
 
+FDCAN_FilterTypeDef extFilter;
+
 /* FDCAN1 init function */
 void MX_FDCAN1_Init(void)
 {
@@ -62,7 +64,19 @@ void MX_FDCAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN FDCAN1_Init 2 */
+  // Create a filter that rejects all extended ID messages
+  FDCAN_FilterTypeDef extFilter;
+  extFilter.IdType = FDCAN_EXTENDED_ID;          // 29-bit ID filter
+  extFilter.FilterIndex = 0;
+  extFilter.FilterType = FDCAN_FILTER_RANGE;     // Range from 0 to max
+  extFilter.FilterConfig = FDCAN_FILTER_REJECT;  // Reject everything
+  extFilter.FilterID1 = 0x00000000;              // Start of range
+  extFilter.FilterID2 = 0x1FFFFFFF;              // End of range
 
+  if (HAL_FDCAN_ConfigFilter(&hfdcan2, &extFilter) != HAL_OK)
+  {
+      Error_Handler();
+  }
   /* USER CODE END FDCAN1_Init 2 */
 
 }
