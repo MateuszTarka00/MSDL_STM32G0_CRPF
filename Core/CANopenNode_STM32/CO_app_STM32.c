@@ -27,6 +27,7 @@
 #include "CO_app_STM32.h"
 #include "CANopen.h"
 #include "main.h"
+#include "NMT_functions.h"
 #include <stdio.h>
 
 #include "CO_storageBlank.h"
@@ -218,6 +219,7 @@ canopen_app_process() {
             CO_delete(CO);
             log_printf("CANopenNode Reset Communication request\n");
             canopen_app_init(canopenNodeSTM32); // Reset Communication routine
+            CO_NMT_initCallbackChanged(canopenNodeSTM32->canOpenStack->NMT, nmtStateChangedCallback);
         } else if (reset_status == CO_RESET_APP) {
             log_printf("CANopenNode Device Reset\n");
             HAL_NVIC_SystemReset(); // Reset the STM32 Microcontroller

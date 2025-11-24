@@ -302,7 +302,7 @@ CO_NMT_reset_cmd_t CO_NMT_process(CO_NMT_t *NMT,
 #if (CO_CONFIG_NMT) & CO_CONFIG_NMT_CALLBACK_CHANGE
     /* Notify operating state change */
     if (NMT->operatingStatePrev != NMTstateCpy || NNTinit) {
-        if (NMT->pFunctNMT != NULL) {
+		if (NMT->pFunctNMT != NULL) {
             NMT->pFunctNMT(NMTstateCpy);
         }
     }

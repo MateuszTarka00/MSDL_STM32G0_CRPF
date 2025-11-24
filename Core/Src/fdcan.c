@@ -65,7 +65,6 @@ void MX_FDCAN1_Init(void)
   }
   /* USER CODE BEGIN FDCAN1_Init 2 */
   // Create a filter that rejects all extended ID messages
-  FDCAN_FilterTypeDef extFilter;
   extFilter.IdType = FDCAN_EXTENDED_ID;          // 29-bit ID filter
   extFilter.FilterIndex = 0;
   extFilter.FilterType = FDCAN_FILTER_RANGE;     // Range from 0 to max

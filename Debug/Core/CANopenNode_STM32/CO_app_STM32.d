@@ -55,7 +55,8 @@ Core/CANopenNode_STM32/CO_app_STM32.o: \
  ../Core/CANopenNode/309/CO_gateway_ascii.h \
  ../Core/CANopenNode/301/CO_SDOclient.h \
  ../Core/CANopenNode/305/CO_LSSmaster.h ../Core/CANopenNode/303/CO_LEDs.h \
- ../Core/CANopenNode/extra/CO_trace.h \
+ ../Core/CANopenNode/extra/CO_trace.h ../Core/Inc/NMT_functions.h \
+ ../Core/Inc/canOpen_data.h ../Core/CANopenNode_STM32/CO_app_STM32.h \
  ../Core/CANopenNode_STM32/CO_storageBlank.h \
  ../Core/CANopenNode/storage/CO_storage.h ../Core/CANopenNode_STM32/OD.h
 
@@ -190,6 +191,12 @@ Core/CANopenNode_STM32/CO_app_STM32.o: \
 ../Core/CANopenNode/303/CO_LEDs.h:
 
 ../Core/CANopenNode/extra/CO_trace.h:
+
+../Core/Inc/NMT_functions.h:
+
+../Core/Inc/canOpen_data.h:
+
+../Core/CANopenNode_STM32/CO_app_STM32.h:
 
 ../Core/CANopenNode_STM32/CO_storageBlank.h:
 
