@@ -69,7 +69,6 @@ void toggleOutputPin(void * param)
 void processFunctionData(DigitalOutput *digitalOutput, const uint8_t functionData)
 {
 	//enter critical section
-	HAL_NVIC_DisableIRQ(TIM14_IRQn);
 
 	deInitSoftwareTimer(digitalOutput->timer);
 	uint8_t property = (functionData >> 1) & 0b111;
@@ -98,6 +97,5 @@ void processFunctionData(DigitalOutput *digitalOutput, const uint8_t functionDat
 	}
 
 	//exit critical section
-	HAL_NVIC_EnableIRQ(TIM14_IRQn);
 
 }
