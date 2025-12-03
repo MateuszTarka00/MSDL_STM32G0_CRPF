@@ -224,7 +224,6 @@ void tpdoRequester(void *argument)
   {
 	  HAL_IWDG_Refresh(&hiwdg);
 	  osDelay(pdMS_TO_TICKS(TPDO_REQUESTER_TASK_DELAY_MS));
-	  CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
 	  if(pendingVirtualInputMappings == 0) //check if there is any virtual input mapping pending
 	  {
@@ -236,16 +235,12 @@ void tpdoRequester(void *argument)
 		  continue;
 	  }
 
-	  CO_LOCK_CAN_SEND(canOpenNodeSTM32.canOpenStack->CANmodule);
-
 	  if(canOpenNodeSTM32.canOpenStack->TPDO[0].CANtxBuff->bufferFull == true)
 	  {
 		  continue;
 	  }
 
 	  OD_requestTPDO(flags6010, 0);
-	  CO_UNLOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
-	  CO_UNLOCK_CAN_SEND(canOpenNodeSTM32.canOpenStack->CANmodule);
 
   }
   /* USER CODE END tpdoRequester */
@@ -358,7 +353,6 @@ void InputCheck(void *argument)
 		{
 			ODR_t result = OD_getSub(entry, subIndex, &io, 0);
 		}
-		CO_LOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
 		//check if input is enabled
 		uint8_t enabledInput = 0;
@@ -403,8 +397,6 @@ void InputCheck(void *argument)
 
 		virtualInputMapping[subIndex - 1].pending = 1;
 		++pendingVirtualInputMappings;
-
-		CO_UNLOCK_OD(canOpenNodeSTM32.canOpenStack->CANmodule);
 
 	}
 
