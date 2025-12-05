@@ -29,7 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32g0xx_hal.h"
-
+#include "cmsis_os.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -147,7 +147,7 @@ void Error_Handler(void);
 #define OUT3_Pin GPIO_PIN_8
 #define OUT3_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+extern osThreadId_t CanOpenMenagerTHandle;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

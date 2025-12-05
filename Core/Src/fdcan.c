@@ -106,6 +106,14 @@ void MX_FDCAN2_Init(void)
   hfdcan2.Init.StdFiltersNbr = 0;
   hfdcan2.Init.ExtFiltersNbr = 0;
   hfdcan2.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION;
+
+  hfdcan2.msgRam.StandardFilterSA = 0x000;  // 112 bytes
+  hfdcan2.msgRam.ExtendedFilterSA = 0x070;  // 64 bytes
+  hfdcan2.msgRam.RxFIFO0SA        = 0x0B0;  // 216 bytes
+  hfdcan2.msgRam.RxFIFO1SA        = 0x188;  // 216 bytes
+  hfdcan2.msgRam.TxEventFIFOSA    = 0x1F0;  // 24 bytes
+  hfdcan2.msgRam.TxFIFOQSA        = 0x208;  // 216 bytes
+
   if (HAL_FDCAN_Init(&hfdcan2) != HAL_OK)
   {
     Error_Handler();
@@ -176,13 +184,6 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef* fdcanHandle)
     GPIO_InitStruct.Alternate = GPIO_AF3_FDCAN1;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-    /* FDCAN1 interrupt Init */
-    HAL_NVIC_SetPriority(TIM16_FDCAN_IT0_IRQn, 3, 0);
-    HAL_NVIC_EnableIRQ(TIM16_FDCAN_IT0_IRQn);
-    HAL_NVIC_SetPriority(TIM17_FDCAN_IT1_IRQn, 3, 0);
-    HAL_NVIC_EnableIRQ(TIM17_FDCAN_IT1_IRQn);
-  /* USER CODE BEGIN FDCAN1_MspInit 1 */
-
   /* USER CODE END FDCAN1_MspInit 1 */
   }
   else if(fdcanHandle->Instance==FDCAN2)
@@ -209,9 +210,9 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef* fdcanHandle)
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
     /* FDCAN2 interrupt Init */
-    HAL_NVIC_SetPriority(TIM16_FDCAN_IT0_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(TIM16_FDCAN_IT0_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(TIM16_FDCAN_IT0_IRQn);
-    HAL_NVIC_SetPriority(TIM17_FDCAN_IT1_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(TIM17_FDCAN_IT1_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(TIM17_FDCAN_IT1_IRQn);
   /* USER CODE BEGIN FDCAN2_MspInit 1 */
 

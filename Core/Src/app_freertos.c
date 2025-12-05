@@ -313,9 +313,11 @@ void CanOpenMenager(void *argument)
 	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , canOpenNodeSTM32.outStatusLEDGreen);
 	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, canOpenNodeSTM32.outStatusLEDRed);
 
+	canopen_app_interrupt();
 	canopen_app_process();
 
-	osDelay(pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
+	ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
+//	osDelay(pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
   }
 
   /* USER CODE END CanOpenMenager */

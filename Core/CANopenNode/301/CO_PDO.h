@@ -38,9 +38,7 @@
                        CO_CONFIG_TPDO_TIMERS_ENABLE | \
                        CO_CONFIG_PDO_SYNC_ENABLE | \
                        CO_CONFIG_PDO_OD_IO_ACCESS | \
-                       CO_CONFIG_GLOBAL_RT_FLAG_CALLBACK_PRE | \
-                       CO_CONFIG_GLOBAL_FLAG_TIMERNEXT | \
-                       CO_CONFIG_GLOBAL_FLAG_OD_DYNAMIC)
+                       CO_CONFIG_GLOBAL_FLAG_TIMERNEXT)
 #endif
 
 #if ((CO_CONFIG_PDO) & (CO_CONFIG_RPDO_ENABLE | CO_CONFIG_TPDO_ENABLE)) || defined CO_DOXYGEN

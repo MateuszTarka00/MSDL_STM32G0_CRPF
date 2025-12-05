@@ -196,7 +196,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
   if(htim == canopenNodeSTM32->timerHandle)
   {
-	  canopen_app_interrupt();
 	  timersHandler();
   }
 
