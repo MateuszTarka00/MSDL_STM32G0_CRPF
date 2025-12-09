@@ -257,7 +257,6 @@ void CanOpenMenager(void *argument)
 {
   /* USER CODE BEGIN CanOpenMenager */
   setCanOpenID();
-  readBuzzerInput();
 
   OD_extension_t virtualInputMappingExtension = {0, virtualInputMappingRead, OD_writeOriginal, 0};
   ODR_t result = OD_extension_init(OD_find(OD, 0x6010), &virtualInputMappingExtension);

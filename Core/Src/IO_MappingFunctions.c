@@ -45,7 +45,7 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 
 	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6200; ++subIndex)
 	{
-		uint8_t identifier[6];
+		uint8_t identifier[6], identifierCopy[6];
 
 		OD_IO_t io;
 		{
@@ -58,12 +58,31 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 			result = io.read(&io.stream, identifier, sizeof(identifier), &bytesRead);
 		}
 
-		if(memcmp(identifier, buffer, size - 1))
+		uint8_t *bufferU8 = (uint8_t*)buffer;
+		identifierCopy[0] = identifier[0];
+
+		for(uint8_t j = 1; j < 5; ++j)
+		{
+			if(bufferU8[j] == 0xff)
+			{
+				identifierCopy[j] = 0xff;
+			}
+			else
+			{
+				identifierCopy[j] = identifier[j];
+			}
+		}
+
+		identifierCopy[5] = identifier[5];
+
+		if(memcmp(identifierCopy, buffer, size - 1))
 		{
 			continue;
 		}
 
-		result = io.write(&ioStreamCopy, buffer, size, bytesWritten);
+		identifier[5] = bufferU8[5];
+
+		result = io.write(&ioStreamCopy, identifier, size, bytesWritten);
 
 		if(result != ODR_OK)
 		{

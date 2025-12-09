@@ -45,8 +45,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/fdcan.h ../Core/Inc/main.h ../Core/Inc/iwdg.h \
  ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- ../Core/CANopenNode_STM32/CO_app_STM32.h ../Core/CANopenNode/CANopen.h \
- ../Core/CANopenNode/301/CO_driver.h ../Core/CANopenNode/301/CO_config.h \
+ ../Core/Inc/conf_inputs.h ../Core/CANopenNode_STM32/CO_app_STM32.h \
+ ../Core/CANopenNode/CANopen.h ../Core/CANopenNode/301/CO_driver.h \
+ ../Core/CANopenNode/301/CO_config.h \
  ../Core/CANopenNode_STM32/CO_driver_target.h \
  ../Core/CANopenNode/301/CO_ODinterface.h \
  ../Core/CANopenNode/301/CO_driver.h \
@@ -170,6 +171,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/usart.h:
 
 ../Core/Inc/gpio.h:
+
+../Core/Inc/conf_inputs.h:
 
 ../Core/CANopenNode_STM32/CO_app_STM32.h:
 
