@@ -71,7 +71,7 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
  ../Core/CANopenNode_STM32/OD.h ../Core/Inc/IO_MappingFunctions.h \
  ../Core/Inc/softwareTimer_ms.h ../Core/Inc/DigitalInputs.h \
  ../Core/Inc/DigitalOutput.h ../Core/Inc/softwareTimer_ms.h \
- ../Core/Inc/iwdg.h
+ ../Core/Inc/displayCommunication.h ../Core/Inc/iwdg.h
 
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -250,5 +250,7 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
 ../Core/Inc/DigitalOutput.h:
 
 ../Core/Inc/softwareTimer_ms.h:
+
+../Core/Inc/displayCommunication.h:
 
 ../Core/Inc/iwdg.h:

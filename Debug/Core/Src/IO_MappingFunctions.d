@@ -68,7 +68,9 @@ Core/Src/IO_MappingFunctions.o: ../Core/Src/IO_MappingFunctions.c \
  ../Core/CANopenNode/305/CO_LSSmaster.h ../Core/CANopenNode/303/CO_LEDs.h \
  ../Core/CANopenNode/extra/CO_trace.h ../Core/Inc/canOpen_data.h \
  ../Core/CANopenNode_STM32/OD.h ../Core/Inc/DigitalOutput.h \
- ../Core/Inc/softwareTimer_ms.h ../Core/Inc/main.h
+ ../Core/Inc/softwareTimer_ms.h ../Core/Inc/main.h \
+ ../Core/Inc/NMT_functions.h ../Core/Inc/canOpen_data.h \
+ ../Core/Inc/displayCommunication.h
 
 ../Core/Inc/IO_MappingFunctions.h:
 
@@ -235,3 +237,9 @@ Core/Src/IO_MappingFunctions.o: ../Core/Src/IO_MappingFunctions.c \
 ../Core/Inc/softwareTimer_ms.h:
 
 ../Core/Inc/main.h:
+
+../Core/Inc/NMT_functions.h:
+
+../Core/Inc/canOpen_data.h:
+
+../Core/Inc/displayCommunication.h:

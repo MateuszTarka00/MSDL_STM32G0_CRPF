@@ -1,0 +1,2 @@
+displayCommunication.c:17:6:initializeDisplayTimer	16	static
+displayCommunication.c:23:6:displayCommunicationTimerHandler	40	static

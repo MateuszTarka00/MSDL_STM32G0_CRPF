@@ -10,6 +10,11 @@
 #include "canOpen_data.h"
 #include "OD.h"
 #include "DigitalOutput.h"
+#include "NMT_functions.h"
+#include "displayCommunication.h"
+
+#define DISPLAY_FLOOR_NUMBER_FUNCTION	0x40
+#define DISPLAY_FLOOR_NUMBER_OUTPUT		0xC7
 
 ODR_t virtualInputMappingRead(OD_stream_t* const stream, void* const buffer, const OD_size_t size, OD_size_t* const bytesRead)
 {
@@ -42,6 +47,19 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 	}
 
 	const OD_entry_t *entry = OD_find(OD, 0x6200);
+	uint8_t *bufferU8 = (uint8_t*)buffer;
+	uint8_t floorIndicators[6];
+
+	if(bufferU8[0] == DISPLAY_FLOOR_NUMBER_FUNCTION)
+	{
+		currentFloorNumber = bufferU8[1];
+		floorIndicators[0] = bufferU8[1] & 1;
+		floorIndicators[1] = bufferU8[1] & 2;
+		floorIndicators[2] = bufferU8[1] & 4;
+		floorIndicators[3] = bufferU8[1] & 8;
+		floorIndicators[4] = bufferU8[1] & 16;
+		floorIndicators[5] = bufferU8[1] & 32;
+	}
 
 	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6200; ++subIndex)
 	{
@@ -58,7 +76,6 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 			result = io.read(&io.stream, identifier, sizeof(identifier), &bytesRead);
 		}
 
-		uint8_t *bufferU8 = (uint8_t*)buffer;
 		identifierCopy[0] = identifier[0];
 
 		for(uint8_t j = 1; j < 5; ++j)
@@ -75,12 +92,62 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 
 		identifierCopy[5] = identifier[5];
 
-		if(memcmp(identifierCopy, buffer, size - 1))
+		if(subIndex > 7)
 		{
-			continue;
+			if(identifier[5])
+			{
+				inputsState |= (1 << (subIndex - 8));
+			}
+			else
+			{
+				inputsState &= ~(1 << (subIndex - 8));
+			}
 		}
 
-		identifier[5] = bufferU8[5];
+		//Indicate floor numer if necessery
+		if(bufferU8[0] == DISPLAY_FLOOR_NUMBER_FUNCTION)
+		{
+			if(identifierCopy[0] == DISPLAY_FLOOR_NUMBER_OUTPUT)
+			{
+				if(identifierCopy[2] != bufferU8[2] && canOpenNodeSTM32.baudrate == 125)
+				{
+					continue;
+				}
+
+				if(floorIndicators[identifierCopy[1] - 6])
+				{
+					identifier[5] = 1;
+				}
+				else
+				{
+					identifier[5] = 0;
+				}
+			}
+		}
+		else
+		{
+
+			if(memcmp(identifierCopy, buffer, size - 1))
+			{
+				continue;
+			}
+
+			identifier[5] = bufferU8[5];
+
+		}
+
+		if(subIndex > 7)
+		{
+			if(identifier[5])
+			{
+				inputsState |= (1 << (subIndex - 8));
+			}
+			else
+			{
+				inputsState &= ~(1 << (subIndex - 8));
+			}
+		}
+
 
 		result = io.write(&ioStreamCopy, identifier, size, bytesWritten);
 

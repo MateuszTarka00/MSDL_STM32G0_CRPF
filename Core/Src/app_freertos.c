@@ -36,6 +36,7 @@
 #include "softwareTimer_ms.h"
 #include "DigitalInputs.h"
 #include "DigitalOutput.h"
+#include "displayCommunication.h"
 #include "iwdg.h"
 /* USER CODE END Includes */
 
@@ -305,6 +306,7 @@ void CanOpenMenager(void *argument)
 
   canopen_app_init(&canOpenNodeSTM32);
   CO_NMT_initCallbackChanged(canOpenNodeSTM32.canOpenStack->NMT, nmtStateChangedCallback);
+  initializeDisplayTimer();
   /* Infinite loop */
   for(;;)
   {
@@ -344,6 +346,7 @@ void InputCheck(void *argument)
 		if(!buzzer_counter)
 		{
 			HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
+			HAL_GPIO_WritePin(BUZZER_OUT_GPIO_Port, BUZZER_OUT_Pin, 0);
 		}
 		else
 		{

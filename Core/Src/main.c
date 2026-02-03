@@ -25,11 +25,12 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "conf_inputs.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "CO_app_STM32.h"
 #include "softwareTimer_ms.h"
+#include "conf_inputs.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,7 +99,7 @@ int main(void)
   MX_TIM17_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  readBuzzerInput();
+	readBuzzerInput();
   /* USER CODE END 2 */
 
   /* Init scheduler */

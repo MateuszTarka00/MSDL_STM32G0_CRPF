@@ -10,8 +10,8 @@
 #include "OD.h"
 #include "flash.h"
 
-//#define FLASH_PAGE 255 //For 256 flash pages
-#define FLASH_PAGE 127 //For 128 flash pages
+#define FLASH_PAGE 255 //For 256 flash pages
+//#define FLASH_PAGE 127 //For 128 flash pages
 
 
 void nmtStateChangedCallback(const CO_NMT_internalState_t state)

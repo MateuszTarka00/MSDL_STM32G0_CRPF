@@ -155,7 +155,7 @@ void TIM17_FDCAN_IT1_IRQHandler(void)
   /* USER CODE BEGIN TIM17_FDCAN_IT1_IRQn 0 */
 
   /* USER CODE END TIM17_FDCAN_IT1_IRQn 0 */
-//  HAL_TIM_IRQHandler(&htim17);
+  HAL_TIM_IRQHandler(&htim17);
   HAL_FDCAN_IRQHandler(&hfdcan2);
   /* USER CODE BEGIN TIM17_FDCAN_IT1_IRQn 1 */
 
