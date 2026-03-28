@@ -7,8 +7,6 @@
 
 #include "conf_inputs.h"
 
-
-
 typedef union
 {
 	struct {

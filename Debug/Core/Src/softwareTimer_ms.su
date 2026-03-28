@@ -1,5 +1,5 @@
-softwareTimer_ms.c:22:6:initSoftwareTimer	40	static
-softwareTimer_ms.c:64:6:deInitSoftwareTimer	24	static
-softwareTimer_ms.c:98:6:startSoftwareTimer	16	static
-softwareTimer_ms.c:104:6:stopSoftwareTimer	16	static
-softwareTimer_ms.c:110:6:timersHandler	16	static
+../Core/Src/softwareTimer_ms.c:22:6:initSoftwareTimer	40	static
+../Core/Src/softwareTimer_ms.c:64:6:deInitSoftwareTimer	24	static
+../Core/Src/softwareTimer_ms.c:98:6:startSoftwareTimer	16	static
+../Core/Src/softwareTimer_ms.c:104:6:stopSoftwareTimer	16	static
+../Core/Src/softwareTimer_ms.c:110:6:timersHandler	16	static

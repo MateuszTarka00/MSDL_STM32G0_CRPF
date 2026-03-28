@@ -27,6 +27,7 @@ void Flash_ErasePage(uint32_t pageIndex)
     eraseInit.TypeErase = FLASH_TYPEERASE_PAGES;
     eraseInit.Page = pageIndex;
     eraseInit.NbPages = 1;
+    eraseInit.Banks = FLASH_BANK_1;
 
     if (HAL_FLASHEx_Erase(&eraseInit, &pageError) != HAL_OK) {
         // Handle error
@@ -40,6 +41,14 @@ void Flash_ErasePage(uint32_t pageIndex)
 void Flash_WriteStruct(uint32_t pageIndex, const Flash_virtualInputOutput *data)
 {
     HAL_FLASH_Unlock();
+    uint32_t err = 0;
+
+    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_OPERR   |
+                            FLASH_FLAG_PROGERR |
+                            FLASH_FLAG_WRPERR  |
+                            FLASH_FLAG_PGAERR  |
+                            FLASH_FLAG_SIZERR  |
+                            FLASH_FLAG_PGSERR);
 
     uint32_t address = Flash_GetPageAddress(pageIndex);
     const uint8_t *src = (const uint8_t *)data;
@@ -50,6 +59,7 @@ void Flash_WriteStruct(uint32_t pageIndex, const Flash_virtualInputOutput *data)
 
         if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, address + i, dword) != HAL_OK) {
             // Handle error
+        	err = HAL_FLASH_GetError(); // <-- debug this
             break;
         }
     }

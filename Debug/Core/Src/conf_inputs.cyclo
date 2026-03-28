@@ -1,0 +1,5 @@
+../Core/Src/conf_inputs.c:38:6:setCanOpenID	1
+../Core/Src/conf_inputs.c:56:9:getCanOpenID	1
+../Core/Src/conf_inputs.c:61:9:getCanOpenBaudRate	1
+../Core/Src/conf_inputs.c:66:6:readBuzzerInput	1
+../Core/Src/conf_inputs.c:71:9:getBuzzerOnOff	1

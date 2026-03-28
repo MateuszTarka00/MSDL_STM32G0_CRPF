@@ -1,0 +1,2 @@
+../Core/Src/DigitalOutputs.c:62:6:toggleOutputPin	1
+../Core/Src/DigitalOutputs.c:69:6:processFunctionData	3

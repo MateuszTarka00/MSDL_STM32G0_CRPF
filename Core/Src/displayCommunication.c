@@ -9,35 +9,29 @@
 #include "softwareTimer_ms.h"
 #include "usart.h"
 
-SoftwareTimerHandler displayTimer;
-
 volatile uint8_t currentFloorNumber = 0;
 volatile uint8_t inputsState = 0;
 
-void initializeDisplayTimer(void)
+void displayCommunicationHandler(void)
 {
-	initSoftwareTimer(&displayTimer, USART_TIMER_MS, displayCommunicationTimerHandler, 1, 0);
-	startSoftwareTimer(&displayTimer);
-}
+    char floorMsg[20];
+    char inpuMsg[20];
 
-void displayCommunicationTimerHandler(void)
-{
-	char floorMsg[] = {'A', 'T', '+', 'F', 'L', 'O', 'O', 'R', '=', 0x00};
-	char inpuMsg[] = {'A', 'T', '+', 'B', 'I', 'T', '=', 0x00};
+    static uint8_t currentFloorNumberTmp = 0xFF;
+    static uint8_t inputsStateTmp = 0xFF;
 
-	uint8_t sendStatus = 0;
+    if(inputsStateTmp != inputsState)
+    {
+    	inputsStateTmp = inputsState;
+    	sprintf(inpuMsg,  "AT+BIT=%u\n", inputsState);
+    	HAL_UART_Transmit(&huart1, (uint8_t *)inpuMsg, strlen(inpuMsg), 10);
+    }
 
-	floorMsg[9] = currentFloorNumber;
-	inpuMsg[7] = inputsState;
-
-	if(HAL_UART_Transmit(&huart1, (uint8_t *)floorMsg, sizeof(floorMsg), 100))
-	{
-		sendStatus = 1;
-	}
-
-	if(HAL_UART_Transmit(&huart1, (uint8_t *)inpuMsg, sizeof(inpuMsg), 100))
-	{
-		sendStatus = 1;
-	}
+    if(currentFloorNumberTmp != currentFloorNumber)
+    {
+    	currentFloorNumberTmp = currentFloorNumber;
+    	sprintf(floorMsg, "AT+FLOOR=%u\n", currentFloorNumber);
+    	HAL_UART_Transmit(&huart1, (uint8_t *)floorMsg, strlen(floorMsg), 10);
+    }
 
 }

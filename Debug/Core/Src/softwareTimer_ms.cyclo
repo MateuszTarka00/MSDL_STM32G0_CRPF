@@ -1,0 +1,5 @@
+../Core/Src/softwareTimer_ms.c:22:6:initSoftwareTimer	5
+../Core/Src/softwareTimer_ms.c:64:6:deInitSoftwareTimer	7
+../Core/Src/softwareTimer_ms.c:98:6:startSoftwareTimer	1
+../Core/Src/softwareTimer_ms.c:104:6:stopSoftwareTimer	1
+../Core/Src/softwareTimer_ms.c:110:6:timersHandler	5

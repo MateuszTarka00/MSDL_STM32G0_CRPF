@@ -223,7 +223,7 @@ void tpdoRequester(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  HAL_IWDG_Refresh(&hiwdg);
+//	  HAL_IWDG_Refresh(&hiwdg);
 	  osDelay(pdMS_TO_TICKS(TPDO_REQUESTER_TASK_DELAY_MS));
 
 	  if(pendingVirtualInputMappings == 0) //check if there is any virtual input mapping pending
@@ -268,6 +268,9 @@ void CanOpenMenager(void *argument)
   OD_extension_t outputGroupExtension = {0, OD_readOriginal, outputGroupWrite, 0};
   result  = OD_extension_init(OD_find(OD, 0x6200), &outputGroupExtension);
 
+  OD_extension_t saveParametersExtension = {0, OD_readOriginal, saveParametersWrite, 0};
+  result  = OD_extension_init(OD_find(OD, 0x1010), &saveParametersExtension);
+
   canOpenNodeSTM32.CANHandle = &hfdcan2;
   canOpenNodeSTM32.HWInitFunction = MX_FDCAN2_Init;
   canOpenNodeSTM32.timerHandle = &htim14;
@@ -306,16 +309,17 @@ void CanOpenMenager(void *argument)
 
   canopen_app_init(&canOpenNodeSTM32);
   CO_NMT_initCallbackChanged(canOpenNodeSTM32.canOpenStack->NMT, nmtStateChangedCallback);
-  initializeDisplayTimer();
   /* Infinite loop */
   for(;;)
   {
-    HAL_IWDG_Refresh(&hiwdg);
+//    HAL_IWDG_Refresh(&hiwdg);
 	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , canOpenNodeSTM32.outStatusLEDGreen);
 	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, canOpenNodeSTM32.outStatusLEDRed);
 
 	canopen_app_interrupt();
 	canopen_app_process();
+
+	displayCommunicationHandler();
 
 	ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
 //	osDelay(pdMS_TO_TICKS(CANOPEN_TASK_DELAY_MS));
@@ -340,7 +344,7 @@ void InputCheck(void *argument)
 
   for(;;)
   {
-	HAL_IWDG_Refresh(&hiwdg);
+//	HAL_IWDG_Refresh(&hiwdg);
 	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6100; ++subIndex)
 	{
 		if(!buzzer_counter)

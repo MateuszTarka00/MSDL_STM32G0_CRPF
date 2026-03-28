@@ -1,0 +1,4 @@
+../Core/Src/IO_MappingFunctions.c:25:7:virtualInputMappingRead	4
+../Core/Src/IO_MappingFunctions.c:46:7:virtualOutputMappingWrite	17
+../Core/Src/IO_MappingFunctions.c:170:7:outputGroupWrite	4
+../Core/Src/IO_MappingFunctions.c:191:7:saveParametersWrite	9

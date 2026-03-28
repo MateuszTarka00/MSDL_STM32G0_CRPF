@@ -1,5 +1,5 @@
-flash.c:15:10:Flash_GetPageAddress	16	static
-flash.c:20:6:Flash_ErasePage	48	static
-flash.c:40:6:Flash_WriteStruct	40	static
-flash.c:60:6:Flash_ReadStruct	16	static
-flash.c:65:9:checkStructEmpty	24	static
+../Core/Src/flash.c:15:10:Flash_GetPageAddress	16	static
+../Core/Src/flash.c:20:6:Flash_ErasePage	48	static
+../Core/Src/flash.c:41:6:Flash_WriteStruct	40	static
+../Core/Src/flash.c:70:6:Flash_ReadStruct	16	static
+../Core/Src/flash.c:75:9:checkStructEmpty	24	static

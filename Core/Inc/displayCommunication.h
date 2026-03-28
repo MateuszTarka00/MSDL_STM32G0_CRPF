@@ -15,7 +15,6 @@
 extern volatile uint8_t currentFloorNumber;
 extern volatile uint8_t inputsState;
 
-void initializeDisplayTimer(void);
-void displayCommunicationTimerHandler(void);
+void displayCommunicationHandler(void);
 
 #endif /* INC_DISPLAYCOMMUNICATION_H_ */
