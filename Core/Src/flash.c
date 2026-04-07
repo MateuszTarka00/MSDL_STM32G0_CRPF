@@ -8,6 +8,8 @@
 #include "flash.h"
 
 #define FLASH_BASE_ADDR     0x08000000U
+//#define FLASH_512KB
+
 
 Flash_virtualInputOutput flash_virtualInputOutput = {};
 
@@ -27,7 +29,13 @@ void Flash_ErasePage(uint32_t pageIndex)
     eraseInit.TypeErase = FLASH_TYPEERASE_PAGES;
     eraseInit.Page = pageIndex;
     eraseInit.NbPages = 1;
+
+#ifdef FLASH_512KB
     eraseInit.Banks = FLASH_BANK_1;
+#else
+    eraseInit.Page = pageIndex - 64;
+    eraseInit.Banks = FLASH_BANK_2;
+#endif
 
     if (HAL_FLASHEx_Erase(&eraseInit, &pageError) != HAL_OK) {
         // Handle error

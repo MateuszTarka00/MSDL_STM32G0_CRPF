@@ -56,6 +56,7 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 	uint8_t *bufferU8 = (uint8_t*)buffer;
 	uint8_t floorIndicators[6];
 
+
 	if(bufferU8[0] == DISPLAY_FLOOR_NUMBER_FUNCTION)
 	{
 		currentFloorNumber = bufferU8[1];
@@ -94,6 +95,11 @@ ODR_t virtualOutputMappingWrite(OD_stream_t* const stream, const void* const buf
 			{
 				identifierCopy[j] = identifier[j];
 			}
+		}
+
+		if(bufferU8[4] == 0x0f) //Exceptions for drivers sending all doors 0x0f
+		{
+			identifierCopy[4] = 0x0f;
 		}
 
 		identifierCopy[5] = identifier[5];

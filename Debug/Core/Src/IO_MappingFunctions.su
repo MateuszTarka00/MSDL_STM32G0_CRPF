@@ -1,4 +1,4 @@
 ../Core/Src/IO_MappingFunctions.c:25:7:virtualInputMappingRead	40	static
 ../Core/Src/IO_MappingFunctions.c:46:7:virtualOutputMappingWrite	128	static
-../Core/Src/IO_MappingFunctions.c:170:7:outputGroupWrite	40	static
-../Core/Src/IO_MappingFunctions.c:191:7:saveParametersWrite	192	static,ignoring_inline_asm
+../Core/Src/IO_MappingFunctions.c:176:7:outputGroupWrite	40	static
+../Core/Src/IO_MappingFunctions.c:197:7:saveParametersWrite	192	static,ignoring_inline_asm
