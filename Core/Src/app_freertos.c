@@ -223,7 +223,7 @@ void tpdoRequester(void *argument)
   /* Infinite loop */
   for(;;)
   {
-//	  HAL_IWDG_Refresh(&hiwdg);
+	  HAL_IWDG_Refresh(&hiwdg);
 	  osDelay(pdMS_TO_TICKS(TPDO_REQUESTER_TASK_DELAY_MS));
 
 	  if(pendingVirtualInputMappings == 0) //check if there is any virtual input mapping pending
@@ -312,7 +312,7 @@ void CanOpenMenager(void *argument)
   /* Infinite loop */
   for(;;)
   {
-//    HAL_IWDG_Refresh(&hiwdg);
+    HAL_IWDG_Refresh(&hiwdg);
 	HAL_GPIO_WritePin(CAN_OK_GPIO_Port, CAN_OK_Pin , canOpenNodeSTM32.outStatusLEDGreen);
 	HAL_GPIO_WritePin(CAN_FAULT_GPIO_Port, CAN_FAULT_Pin, canOpenNodeSTM32.outStatusLEDRed);
 
@@ -344,7 +344,7 @@ void InputCheck(void *argument)
 
   for(;;)
   {
-//	HAL_IWDG_Refresh(&hiwdg);
+	HAL_IWDG_Refresh(&hiwdg);
 	for(uint8_t subIndex = 1; subIndex <= OD_CNT_ARR_6100; ++subIndex)
 	{
 		if(!buzzer_counter)

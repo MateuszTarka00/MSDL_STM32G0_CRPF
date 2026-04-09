@@ -14,6 +14,8 @@
 #include "displayCommunication.h"
 #include "flash.h"
 
+#define FLASH_PAGE 127
+
 #define DISPLAY_FLOOR_NUMBER_FUNCTION	0x40
 #define DISPLAY_FLOOR_NUMBER_OUTPUT		0xC7
 

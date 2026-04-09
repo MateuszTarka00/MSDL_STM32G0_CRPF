@@ -38,6 +38,7 @@ extern FDCAN_HandleTypeDef hfdcan2;
 /* USER CODE END Private defines */
 
 void MX_FDCAN2_Init(void);
+void CAN_MonitorAndRecover(void);
 
 /* USER CODE BEGIN Prototypes */
 

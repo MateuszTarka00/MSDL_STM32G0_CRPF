@@ -202,6 +202,7 @@ canopen_app_process() {
     /* loop for normal program execution ******************************************/
     /* get time difference since last function call */
     time_current = HAL_GetTick();
+    static uint8_t prevBusError = 0;
 
     if ((time_current - time_old) > 0) { // Make sure more than 1ms elapsed
         /* CANopen process */
@@ -212,18 +213,37 @@ canopen_app_process() {
         canopenNodeSTM32->outStatusLEDRed = CO_LED_RED(CO->LEDs, CO_LED_CANopen);
         canopenNodeSTM32->outStatusLEDGreen = CO_LED_GREEN(CO->LEDs, CO_LED_CANopen);
 
-        if (reset_status == CO_RESET_COMM) {
-            /* delete objects from memory */
-        	HAL_TIM_Base_Stop_IT(canopenNodeSTM32->timerHandle);
-            CO_CANsetConfigurationMode((void*)canopenNodeSTM32);
-            CO_delete(CO);
-            log_printf("CANopenNode Reset Communication request\n");
-            canopen_app_init(canopenNodeSTM32); // Reset Communication routine
-            CO_NMT_initCallbackChanged(canopenNodeSTM32->canOpenStack->NMT, nmtStateChangedCallback);
+        FDCAN_ProtocolStatusTypeDef status;
+        HAL_FDCAN_GetProtocolStatus(canOpenNodeSTM32.CANHandle, &status);
+
+        if (reset_status == CO_RESET_COMM)
+        {
+			/* delete objects from memory */
+			HAL_TIM_Base_Stop_IT(canopenNodeSTM32->timerHandle);
+			CO_CANsetConfigurationMode((void*)canopenNodeSTM32);
+			CO_delete(CO);
+			log_printf("CANopenNode Reset Communication request\n");
+			canopen_app_init(canopenNodeSTM32); // Reset Communication routine
+			CO_NMT_initCallbackChanged(canopenNodeSTM32->canOpenStack->NMT, nmtStateChangedCallback);
+
         } else if (reset_status == CO_RESET_APP) {
             log_printf("CANopenNode Device Reset\n");
             HAL_NVIC_SystemReset(); // Reset the STM32 Microcontroller
         }
+
+        if((status.ErrorPassive || status.BusOff) && !prevBusError)
+        {
+			/* delete objects from memory */
+			HAL_TIM_Base_Stop_IT(canopenNodeSTM32->timerHandle);
+			CO_CANsetConfigurationMode((void*)canopenNodeSTM32);
+			CO_delete(CO);
+			log_printf("CANopenNode Reset Communication request\n");
+			canopen_app_init(canopenNodeSTM32); // Reset Communication routine
+			CO_NMT_initCallbackChanged(canopenNodeSTM32->canOpenStack->NMT, nmtStateChangedCallback);
+        }
+
+        prevBusError = status.ErrorPassive || status.BusOff;
+
     }
 }
 
